@@ -59,6 +59,26 @@ export const defaultTheme = {
     "$color-info-110": "#183594",
     "$color-info-120": "#0F2477",
     "$color-info-130": "#091862",
-
+  },
+  textSizes: {
+    "h1": "6rem",
+    "h2": "3.75rem",
+    "h3": "3rem",
+    "h4": "2.125rem",
+    "h5": "1.5rem",
+    "h6": "1.25rem",
+    "subtitle1": "1rem",
+    "subtitle2": "0.875rem",
+    "button": "0.938rem",
+    "overline": "0.625rem",
+    "caption": "0.75rem",
+    "body1": "1rem",
+    "body2": "0.875rem",
+    "label": "1rem",
+  },
+  fonts: {
+    regular: "Roboto, sans-serif",
+    medium: "Roboto Medium, sans-serif",
+    bold: "Roboto Bold, sans-serif",
   }
 }
