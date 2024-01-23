@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
@@ -19,11 +20,20 @@ export const LeftContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TabsContainer = styled.div`
-  display: flex;
+export const StyledNavLink = styled(NavLink)`
   color: ${props => props.theme.colors["$color-neutral-60"]};
   font-family: ${props => props.theme.fonts.medium};
   font-size: ${props => props.theme.textSizes.h6};
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const TabsContainer = styled.div`
+  display: flex;
+  
 `;
 
 export const Tab = styled.div`
