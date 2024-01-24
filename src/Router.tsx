@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { SignIn } from './pages/SignIn'
-import { MyProjects } from './pages/myProjects'
-import { Discover } from './pages/discover'
+import { MyProjects } from './pages/MyProjects'
+import { Discover } from './pages/Discover'
 
 export function Router() {
   return (
