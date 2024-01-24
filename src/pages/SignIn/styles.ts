@@ -12,7 +12,7 @@ export const SignInContainer = styled.main`
 export const Image = styled.img`
   height: 100vh;
   max-width: 32.813rem;
-  @media (max-width: 1100px) {
+  @media (max-width: 970px) {
     display: none;
   }
 `
@@ -24,8 +24,8 @@ export const AreaLogin = styled.div`
   flex-direction: column;
   gap: 2rem;
   justify-content: center;
-  padding: 0 1rem;
   text-align: center;
+  padding: 0 2rem;
 `
 
 export const Title = styled.h3`
@@ -43,7 +43,6 @@ export const AreaForm = styled('form')`
   flex: 1;
   flex-direction: column;
   gap: 1rem;
-  padding: 0 1rem;
   width: 100%;
 `
 export const SubTitle = styled.h5`

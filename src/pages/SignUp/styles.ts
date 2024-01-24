@@ -13,7 +13,7 @@ export const SignUpContainer = styled.main`
 export const Image = styled.img`
   height: 100vh;
   max-width: 32.813rem;
-  @media (max-width: 1100px) {
+  @media (max-width: 970px) {
     display: none;
   }
 `
@@ -23,7 +23,7 @@ export const AreaRegister = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 0 2rem;
   text-align: center;
   width: 100%;
   height: 100vh;
