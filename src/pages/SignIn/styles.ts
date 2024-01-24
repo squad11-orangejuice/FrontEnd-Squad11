@@ -17,7 +17,7 @@ export const Image = styled.img`
   }
 `
 
-export const AreaTexto = styled.div`
+export const AreaLogin = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
@@ -48,7 +48,6 @@ export const AreaForm = styled('form')`
 `
 export const SubTitle = styled.h5`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  margin-top: 0.5rem;
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${({ theme }) => theme.textSizes.h5};
   font-weight: 400;

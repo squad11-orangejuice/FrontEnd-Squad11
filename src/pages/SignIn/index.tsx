@@ -1,28 +1,31 @@
-import { GoogleButton } from './Components/GoogleButton'
-import TextField from '@mui/material/TextField'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
+
+import { GoogleButton } from './Components/GoogleButton'
+
+import TextField from '@mui/material/TextField'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import LogoSignIn from '@/assets/logo_home.svg'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+
 import {
   AreaForm,
   SignInContainer,
   Title,
   Image,
-  AreaTexto,
   SubTitle,
   SubmitButton,
   LinkText,
+  AreaLogin,
 } from './styles'
-import LogoSignIn from '@/assets/logo_home.svg'
-import { useState } from 'react'
-import InputAdornment from '@mui/material/InputAdornment'
-import IconButton from '@mui/material/IconButton'
 
 const validationSchema = z.object({
   email: z.string().email('Digite um e-mail válido'),
-  password: z.string().min(8, 'A senha deve ter pelo menos 6 caracteres'),
+  password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres'),
 })
 
 type FormInputs = z.infer<typeof validationSchema>
@@ -55,11 +58,11 @@ export function SignIn() {
   return (
     <SignInContainer>
       <Image src={LogoSignIn} alt="Logo Sign In" />
-      <AreaTexto>
+      <AreaLogin>
         <Title>Entre no Orange Portfólio</Title>
         <GoogleButton />
-        <SubTitle>Faça login com email</SubTitle>
         <AreaForm onSubmit={handleSubmit(onSubmit, handleError)}>
+          <SubTitle>Faça login com email</SubTitle>
           <TextField
             sx={{ width: '100%' }}
             label="Email address"
@@ -96,11 +99,11 @@ export function SignIn() {
             size="large"
             sx={{ width: '100%' }}
           >
-            Enviar
+            ENTRAR
           </SubmitButton>
           <LinkText to={'/registro'}>Cadastre-se</LinkText>
         </AreaForm>
-      </AreaTexto>
+      </AreaLogin>
     </SignInContainer>
   )
 }
