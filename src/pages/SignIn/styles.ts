@@ -71,11 +71,11 @@ export const SubmitButton = styled(LoadingButton)`
 `
 
 export const LinkText = styled(Link)`
+  color: ${({ theme }) => theme.colors['$color-neutral-100']};
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${({ theme }) => theme.textSizes.subtitle1};
   font-weight: 400;
   letter-spacing: 0.15px;
   line-height: 16px;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors['$color-neutral-100']};
 `
