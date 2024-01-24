@@ -6,8 +6,9 @@ import { Router } from './Router'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 export function App() {
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
   return (
-    <GoogleOAuthProvider clientId="952654118268-3jvc3himegis13kc41iighgs8pk1c1j7.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={googleClientId}>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyle />
         <BrowserRouter>
