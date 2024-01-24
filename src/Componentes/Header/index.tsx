@@ -1,7 +1,7 @@
-import { HeaderContainer, Tab, TabsContainer, LeftContainer, RightContainer, UserContainer, NotificacaoContainer } from "./styles";
+import { HeaderContainer, Tab, TabsContainer, LeftContainer, RightContainer, UserContainer, NotificacaoContainer, StyledNavLink } from "./styles";
 import LogoOrange from "../../assets/LogoOrange.png";
 import ImageUser from "../../assets/ImageUser.png";
-import iconNotificacao from "../../assets/iconNotificacao.svg"
+import iconNotificacao from "../../assets/iconNotificacao.svg";
 
 export function Header() {
   return (
@@ -9,8 +9,13 @@ export function Header() {
       <LeftContainer>
         <img src={LogoOrange} />
         <TabsContainer>
-          <Tab>Meus Projetos</Tab>
-          <Tab>Descobrir</Tab>
+          <StyledNavLink to="/">
+            <Tab>Meus Projetos</Tab>
+          </StyledNavLink>
+          <StyledNavLink to="/descobrir">
+            <Tab>Descobrir</Tab>
+          </StyledNavLink>
+
         </TabsContainer>
       </LeftContainer>
       <RightContainer>
