@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import LoadingButton from '@mui/lab/LoadingButton'
+import Alert from '@mui/material/Alert'
 
-export const SignInContainer = styled.main`
+export const SignUpContainer = styled.main`
   align-items: center;
   display: flex;
   height: 100vh;
@@ -17,20 +18,40 @@ export const Image = styled.img`
   }
 `
 
-export const AreaLogin = styled.div`
+export const AreaRegister = styled.div`
   align-items: center;
   display: flex;
-  flex: 1;
   flex-direction: column;
-  gap: 2rem;
   justify-content: center;
   padding: 0 1rem;
   text-align: center;
+  width: 100%;
+  height: 100vh;
+`
+
+export const AlertModal = styled(Alert)`
+  position: fixed;
+  top: 77px;
+  font-weight: ${({ theme }) => theme.textSizes.subtitle1};
+  height: 52px;
+  width: 320px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  &.visible {
+    opacity: 1;
+  }
+
+  @media (max-width: 360px) {
+    width: calc(100% - 2rem);
+    left: 1rem;
+    right: 1rem;
+  }
 `
 
 export const Title = styled.h3`
   font-size: ${({ theme }) => theme.textSizes.h3};
   font-family: ${({ theme }) => theme.fonts.regular};
+  margin-bottom: 2rem;
   @media (max-width: 450px) {
     font-size: ${({ theme }) => theme.textSizes.h5};
     line-height: 24px;
@@ -39,27 +60,17 @@ export const Title = styled.h3`
 
 export const AreaForm = styled('form')`
   align-items: flex-start;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
-  padding: 0 1rem;
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
-`
-export const SubTitle = styled.h5`
-  color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: ${({ theme }) => theme.textSizes.h5};
-  font-weight: 400;
-  line-height: 24px;
-
-  @media (max-width: 450px) {
-    font-size: ${({ theme }) => theme.textSizes.subtitle1};
-    line-height: 16px;
-    letter-spacing: 0.15px;
+  & > div:nth-child(n + 3) {
+    grid-column: span 2;
   }
 `
+
 export const SubmitButton = styled(LoadingButton)`
+  grid-column: span 2;
   && {
     background-color: ${({ theme }) => theme.colors['$color-secondary-100']};
 
@@ -77,4 +88,6 @@ export const LinkText = styled(Link)`
   letter-spacing: 0.15px;
   line-height: 16px;
   text-decoration: none;
+  text-align: left;
+  width: 100%;
 `

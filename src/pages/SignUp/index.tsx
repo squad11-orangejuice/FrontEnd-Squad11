@@ -2,37 +2,39 @@ import { useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
-
-import { GoogleButton } from './Components/GoogleButton'
-
 import TextField from '@mui/material/TextField'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import LogoSignIn from '@/assets/logo_home.svg'
+import LogoSignUp from '@/assets/logo_register.svg'
 import InputAdornment from '@mui/material/InputAdornment'
 import IconButton from '@mui/material/IconButton'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 
 import {
-  AreaForm,
-  SignInContainer,
-  Title,
+  SignUpContainer,
   Image,
-  SubTitle,
+  Title,
+  AreaForm,
   SubmitButton,
   LinkText,
-  AreaLogin,
+  AreaRegister,
+  AlertModal,
 } from './styles'
 
 const validationSchema = z.object({
+  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
+  surname: z.string().min(1, 'O sobrenome deve ter pelo menos 2 caracteres'),
   email: z.string().email('Digite um e-mail válido'),
   password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres'),
 })
 
 type FormInputs = z.infer<typeof validationSchema>
 
-export function SignIn() {
-  const [loading, setLoading] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+export function SignUp() {
+  const [loading, setLoading] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [sucessRegister, setSucessRegister] = useState<boolean>(false)
+  const [messageError, setMessageError] = useState<string>('')
 
   const {
     handleSubmit,
@@ -45,6 +47,9 @@ export function SignIn() {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data)
     setLoading(true)
+    setSucessRegister(true)
+    setMessageError('')
+    setLoading(false)
   }
 
   const handleError: SubmitErrorHandler<FormInputs> = (errors) => {
@@ -55,14 +60,48 @@ export function SignIn() {
     setShowPassword((prev) => !prev)
   }
 
+  const addClassSucess = sucessRegister ? 'visible' : ''
+  const addClassError = messageError.length > 0 ? 'visible' : ''
+
   return (
-    <SignInContainer>
-      <Image src={LogoSignIn} alt="Logo Sign In" />
-      <AreaLogin>
-        <Title>Entre no Orange Portfólio</Title>
-        <GoogleButton />
+    <SignUpContainer>
+      <Image src={LogoSignUp} alt="Logo Sign In" />
+      <AreaRegister>
+        <AlertModal
+          className={addClassSucess}
+          severity="success"
+          variant="filled"
+          iconMapping={{
+            success: <CheckCircleOutlineIcon />,
+          }}
+        >
+          Cadastro feito com sucesso
+        </AlertModal>
+
+        <AlertModal className={addClassError} severity="error" variant="filled">
+          Usuário ja cadastrado
+        </AlertModal>
+
+        <Title>Cadastre-se</Title>
         <AreaForm onSubmit={handleSubmit(onSubmit, handleError)}>
-          <SubTitle>Faça login com email</SubTitle>
+          <TextField
+            sx={{ width: '100%' }}
+            label="Nome"
+            type="text"
+            required
+            {...register('name')}
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+          <TextField
+            sx={{ width: '100%' }}
+            label="Sobrenome"
+            type="text"
+            required
+            {...register('surname')}
+            error={!!errors.surname}
+            helperText={errors.surname?.message}
+          />
           <TextField
             sx={{ width: '100%' }}
             label="Email address"
@@ -99,11 +138,11 @@ export function SignIn() {
             size="large"
             sx={{ width: '100%' }}
           >
-            ENTRAR
+            CADASTRAR
           </SubmitButton>
-          <LinkText to={'/registro'}>Cadastre-se</LinkText>
+          <LinkText to={'/'}>Logar</LinkText>
         </AreaForm>
-      </AreaLogin>
-    </SignInContainer>
+      </AreaRegister>
+    </SignUpContainer>
   )
 }
