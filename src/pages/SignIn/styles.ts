@@ -1,11 +1,13 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import LoadingButton from '@mui/lab/LoadingButton'
 
 export const SignInContainer = styled.main`
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  width: 100%;
 `
 export const Image = styled.img`
   height: 100vh;
@@ -15,27 +17,65 @@ export const Image = styled.img`
   }
 `
 
-export const AreaForm = styled.div`
+export const AreaTexto = styled.div`
+  align-items: center;
   display: flex;
   flex: 1;
-  gap: 2rem;
-
   flex-direction: column;
+  gap: 2rem;
   justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 0 1rem;
+  text-align: center;
 `
 
-export const Title = styled.h1`
+export const Title = styled.h3`
   font-size: ${({ theme }) => theme.textSizes.h3};
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-weight: 400;
-  line-height: 40px;
-  color: ${({ theme }) => theme.colors['$color-principal-90']};
-
-  @media (max-width: 1100px) {
+  @media (max-width: 450px) {
     font-size: ${({ theme }) => theme.textSizes.h5};
     line-height: 24px;
   }
+`
+
+export const AreaForm = styled('form')`
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+  width: 100%;
+`
+export const SubTitle = styled.h5`
+  color: ${({ theme }) => theme.colors['$color-neutral-110']};
+  margin-top: 0.5rem;
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${({ theme }) => theme.textSizes.h5};
+  font-weight: 400;
+  line-height: 24px;
+
+  @media (max-width: 600px) {
+    font-size: ${({ theme }) => theme.textSizes.subtitle1};
+    line-height: 16px;
+    letter-spacing: 0.15px;
+  }
+`
+export const SubmitButton = styled(LoadingButton)`
+  && {
+    background-color: ${({ theme }) => theme.colors['$color-secondary-100']};
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors['$color-secondary-110']};
+    }
+  }
+`
+
+export const LinkText = styled(Link)`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${({ theme }) => theme.textSizes.subtitle1};
+  font-weight: 400;
+  letter-spacing: 0.15px;
+  line-height: 16px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors['$color-neutral-100']};
 `
