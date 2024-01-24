@@ -11,14 +11,16 @@ import {
 import LogoOrange from '@/assets/LogoOrange.png'
 import ImageUser from '@/assets/ImageUser.png'
 import iconNotificacao from '@/assets/iconNotificacao.svg'
+import MenuButton from '../MenuButton'
 
 export function Header() {
   return (
     <HeaderContainer>
       <LeftContainer>
+        <MenuButton />
         <img src={LogoOrange} alt="Orange logo" />
         <TabsContainer>
-          <StyledNavLink to="/">
+          <StyledNavLink to="/projetos">
             <Tab>Meus Projetos</Tab>
           </StyledNavLink>
           <StyledNavLink to="/descobrir">

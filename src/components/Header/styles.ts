@@ -9,14 +9,27 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   padding: 1rem 1.875rem 1rem 1.875rem;
   background: ${(props) => props.theme.colors['$color-principal-100']};
+
+  @media only screen and (min-width: 601px) {
+    button {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+  }
 `
 
 export const LeftContainer = styled.div`
   display: flex;
-  width: 35%;
+  width: 30%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  img {
+    margin-right: 2rem;
+  }
 `
 
 export const StyledNavLink = styled(NavLink)`
@@ -24,6 +37,11 @@ export const StyledNavLink = styled(NavLink)`
   font-family: ${(props) => props.theme.fonts.medium};
   font-size: ${(props) => props.theme.textSizes.h6};
   text-decoration: none;
+
+  // mobile //
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 
   &:hover {
     text-decoration: underline;
