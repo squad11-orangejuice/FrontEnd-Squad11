@@ -20,12 +20,16 @@ export function Header() {
         <MenuButton />
         <img src={LogoOrange} alt="Orange logo" />
         <TabsContainer>
-          <StyledNavLink to="/projetos">
-            <Tab>Meus Projetos</Tab>
-          </StyledNavLink>
-          <StyledNavLink to="/descobrir">
-            <Tab>Descobrir</Tab>
-          </StyledNavLink>
+          <div>
+            <StyledNavLink to="/projetos">
+              <Tab>Meus Projetos</Tab>
+            </StyledNavLink>
+          </div>
+          <div>
+            <StyledNavLink to="/descobrir">
+              <Tab>Descobrir</Tab>
+            </StyledNavLink>
+          </div>
         </TabsContainer>
       </LeftContainer>
       <RightContainer>

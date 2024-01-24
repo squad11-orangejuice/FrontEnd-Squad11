@@ -44,16 +44,26 @@ export const StyledNavLink = styled(NavLink)`
   }
 
   &:hover {
-    text-decoration: underline;
+    color: ${props => props.theme.colors["$color-secondary-100"]};
+    transition: 0.2s;
   }
-`
+  transition: 0.2s;
+`;
 
 export const TabsContainer = styled.div`
   display: flex;
+  white-space: nowrap; //impedir a quebra de linha 
+  
+  >div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
 `
 
 export const Tab = styled.div`
-  margin-right: 20px;
+  margin-right: 1.25rem;
   cursor: pointer;
 `
 export const RightContainer = styled.div`
