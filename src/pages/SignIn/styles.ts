@@ -54,7 +54,7 @@ export const SubTitle = styled.h5`
   font-weight: 400;
   line-height: 24px;
 
-  @media (max-width: 600px) {
+  @media (max-width: 450px) {
     font-size: ${({ theme }) => theme.textSizes.subtitle1};
     line-height: 16px;
     letter-spacing: 0.15px;
