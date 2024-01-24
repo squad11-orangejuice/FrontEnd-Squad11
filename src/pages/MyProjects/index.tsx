@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import ImageUser from "@/assets/ImageUser.png";
 import { BotaoAdicionarProjeto, ContainerUser, MyProjectsContainer, UserInfo, UserLocal, UserNome, UserPerfil } from "./styles";
 import TextField from '@mui/material/TextField';
+import { CardProject } from "@/components/CardProject";
 
 
 
@@ -28,6 +29,7 @@ export function MyProjects() {
           label="Buscar tags" />
       </MyProjectsContainer>
 
+      <CardProject />
     </>
   )
 }
