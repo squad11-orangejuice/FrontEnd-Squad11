@@ -42,7 +42,7 @@ export const MenuItem = styled(NavLink)`
   cursor: pointer;
 
   &:hover {
-    text-decoration: underline;
+    color: ${props => props.theme.colors["$color-secondary-100"]};
   }
 `
 
