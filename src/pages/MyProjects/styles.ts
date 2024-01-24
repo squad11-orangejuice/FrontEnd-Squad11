@@ -61,5 +61,23 @@ export const BotaoAdicionarProjeto = styled.button`
   background: rgba(0, 0, 0, 0.12);
   text-transform: uppercase;
   margin-top: 0.5rem;
-  /* cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')}; */
+`;
+
+
+
+export const MyProjectsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  gap: 1rem;
+  color: ${(props) => props.theme.colors['$color-neutral-130']};
+  font-family: ${(props) => props.theme.fonts.medium};
+  font-size: ${(props) => props.theme.textSizes.h6};
+
+  @media only screen and (min-width: 601px) {
+   max-width: 50%;
+  }
+
 `;

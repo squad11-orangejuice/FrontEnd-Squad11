@@ -1,6 +1,9 @@
 import { Header } from "@/components/Header";
 import ImageUser from "@/assets/ImageUser.png";
-import { BotaoAdicionarProjeto, ContainerUser, UserInfo, UserLocal, UserNome, UserPerfil } from "./styles";
+import { BotaoAdicionarProjeto, ContainerUser, MyProjectsContainer, UserInfo, UserLocal, UserNome, UserPerfil } from "./styles";
+import TextField from '@mui/material/TextField';
+
+
 
 export function MyProjects() {
   return (
@@ -15,8 +18,15 @@ export function MyProjects() {
           <UserLocal> Brasil </UserLocal>
           <BotaoAdicionarProjeto><strong> Adicionar Projeto </strong>  </BotaoAdicionarProjeto>
         </UserInfo>
-
       </ContainerUser>
+
+      <MyProjectsContainer>
+        Meus projetos
+        <TextField
+          sx={{ width: '100%' }}
+          id="outlined-helperText"
+          label="Buscar tags" />
+      </MyProjectsContainer>
 
     </>
   )
