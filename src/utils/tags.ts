@@ -1,0 +1,15 @@
+export const tags = [
+  'UX',
+  'Web',
+  'UI',
+  'React',
+  'Vue',
+  'Js',
+  'Ts',
+  'Php',
+  'Node',
+  'Laravel',
+  'Python',
+  'NextJS',
+  'NestJs',
+]
