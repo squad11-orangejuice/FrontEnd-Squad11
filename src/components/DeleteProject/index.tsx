@@ -12,9 +12,10 @@ import {
 type Props = {
   idProject: string
   isClosed: () => void
+  openModalSucess: () => void
 }
 
-export function DeleteProject({ isClosed, idProject }: Props) {
+export function DeleteProject({ isClosed, idProject, openModalSucess }: Props) {
   const [loading, setLoading] = useState(false)
 
   function handleClosedModal() {
@@ -25,6 +26,7 @@ export function DeleteProject({ isClosed, idProject }: Props) {
     setLoading(true)
     console.log(idProject)
     setLoading(false)
+    openModalSucess()
   }
 
   return (
