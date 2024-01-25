@@ -15,14 +15,19 @@ import EditProjectButton from '../EditProjectButton'
 interface CarProjectProps {
   url?: string
   creatorId?: number
+  tags: Array<string>
 }
-export function CardProject({ url, creatorId }: CarProjectProps) {
+export function CardProject({ url, creatorId, tags }: CarProjectProps) {
   const [userId, setUserId] = useState(1)
   const shouldRenderEditButton =
     userId === creatorId ? <EditProjectButton /> : null
 
   // remover console.log assim que possivel
   console.log(setUserId)
+
+  const tagContent = tags.map((item) => {
+    return <Tag key={item}>{item}</Tag>
+  })
 
   const cardContent = url ? (
     <>
@@ -53,10 +58,7 @@ export function CardProject({ url, creatorId }: CarProjectProps) {
               <p>Camila Soares</p>
               <p>12/23</p>
             </div>
-            <div>
-              <Tag>UX</Tag>
-              <Tag>WEB</Tag>
-            </div>
+            <div>{tagContent}</div>
           </Footer>
         ) : null}
       </CardProjectContainer>
