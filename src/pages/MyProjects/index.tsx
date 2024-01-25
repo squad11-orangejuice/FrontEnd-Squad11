@@ -19,7 +19,7 @@ export function MyProjects() {
     // URLs para testar card
     // 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
     // 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    // 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
+    'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
     // 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
     // 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
   ])
@@ -30,7 +30,7 @@ export function MyProjects() {
   const cardContent =
     cards.length >= 1 ? (
       cards.map((item) => {
-        return <CardProject url={item} key={item} />
+        return <CardProject url={item} key={item} creatorId={1} />
       })
     ) : (
       <CardProject />

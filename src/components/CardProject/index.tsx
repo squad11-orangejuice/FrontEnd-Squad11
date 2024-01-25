@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   CardProjectContainer,
   SubtitleText,
@@ -9,11 +10,20 @@ import {
 import ImageUser from '@/assets/ImageUser.png'
 
 import CollectionsIcon from '@mui/icons-material/Collections'
+import EditProjectButton from '../EditProjectButton'
 
 interface CarProjectProps {
   url?: string
+  creatorId?: number
 }
-export function CardProject({ url }: CarProjectProps) {
+export function CardProject({ url, creatorId }: CarProjectProps) {
+  const [userId, setUserId] = useState(1)
+  const shouldRenderEditButton =
+    userId === creatorId ? <EditProjectButton /> : null
+
+  // remover console.log assim que possivel
+  console.log(setUserId)
+
   const cardContent = url ? (
     <>
       <img src={url} alt="Imagem" />
@@ -32,8 +42,9 @@ export function CardProject({ url }: CarProjectProps) {
   )
 
   return (
-    <>
+    <div>
       <CardProjectContainer>
+        {shouldRenderEditButton}
         {cardContent}
         {url ? (
           <Footer>
@@ -49,6 +60,6 @@ export function CardProject({ url }: CarProjectProps) {
           </Footer>
         ) : null}
       </CardProjectContainer>
-    </>
+    </div>
   )
 }

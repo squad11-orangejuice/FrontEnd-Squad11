@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const CardProjectContainer = styled.button`
+  position: relative;
   display: flex;
   width: calc(100% - 4rem);
   height: 16.12rem;
@@ -9,7 +10,6 @@ export const CardProjectContainer = styled.button`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* padding: 4.25rem 3.75rem 4.25rem 3.75rem; */
   background: ${(props) => props.theme.colors['$color-neutral-70']};
   border: none;
 
@@ -80,4 +80,8 @@ export const Tag = styled.div`
   color: ${({ theme }) => theme.colors['$color-neutral-100']};
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 12px;
+`
+
+export const EditButton = styled.button`
+  position: absolute;
 `
