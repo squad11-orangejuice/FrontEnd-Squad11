@@ -14,10 +14,11 @@ import EditProjectButton from '../EditProjectButton'
 
 interface CarProjectProps {
   url?: string
+  name?: string
   creatorId?: number
   tags: Array<string>
 }
-export function CardProject({ url, creatorId, tags }: CarProjectProps) {
+export function CardProject({ url, creatorId, tags, name }: CarProjectProps) {
   const [userId, setUserId] = useState(1)
   const shouldRenderEditButton =
     userId === creatorId ? <EditProjectButton /> : null
@@ -55,7 +56,7 @@ export function CardProject({ url, creatorId, tags }: CarProjectProps) {
           <Footer>
             <div>
               <img src={ImageUser} alt="Foto do usuário" />
-              <p>Camila Soares</p>
+              <p>{name}</p>
               <p>12/23</p>
             </div>
             <div>{tagContent}</div>

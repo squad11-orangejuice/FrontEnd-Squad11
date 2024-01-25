@@ -18,25 +18,26 @@ const mockInfo = [
   // Info Para Testar Cards
   {
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Item 1',
+    name: 'Alanna Silva',
     tags: ['UX', 'WEB'],
   },
   {
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Item 2',
+    name: 'Carolina',
     tags: ['UX', 'UI'],
   },
   {
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Item 3',
+    name: 'Douglas',
     tags: ['UI', 'WEB'],
   },
 ]
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
-
   const [searchTerm, setSearchTerm] = useState('')
+
+  const shouldDisableButton = items.length === 0
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value)
@@ -48,6 +49,10 @@ export function MyProjects() {
     ),
   )
 
+  const handleOnClick = () => {
+    console.log('Hello')
+  }
+
   const cardContent =
     filteredItems.length >= 1 ? (
       filteredItems.map((item) => {
@@ -57,6 +62,7 @@ export function MyProjects() {
             key={item.name}
             creatorId={1}
             tags={item.tags}
+            name={item.name}
           />
         )
       })
@@ -74,7 +80,10 @@ export function MyProjects() {
         <UserInfo>
           <UserNome> Camila Soares</UserNome>
           <UserLocal> Brasil </UserLocal>
-          <BotaoAdicionarProjeto>
+          <BotaoAdicionarProjeto
+            onClick={handleOnClick}
+            disabled={shouldDisableButton}
+          >
             <strong> Adicionar Projeto </strong>{' '}
           </BotaoAdicionarProjeto>
         </UserInfo>

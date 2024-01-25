@@ -52,11 +52,22 @@ export const BotaoAdicionarProjeto = styled.button`
   border-radius: 4px;
   font-family: ${(props) => props.theme.fonts.bold};
   font-size: ${(props) => props.theme.textSizes.button};
-  color: rgba(0, 0, 0, 0.38);
   border: none;
-  background: rgba(0, 0, 0, 0.12);
+  color: white;
+  background: ${(props) => props.theme.colors['$color-secondary-100']};
   text-transform: uppercase;
   margin-top: 0.5rem;
+
+  &:hover {
+    background: ${(props) => props.theme.colors['$color-secondary-110']};
+    transition: 0.2s;
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.38);
+    cursor: default;
+    background: #d3d3d3;
+  }
 `
 
 export const MyProjectsContainer = styled.div`
