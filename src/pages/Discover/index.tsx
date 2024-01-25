@@ -56,7 +56,7 @@ export function Discover() {
     <>
       <Header />
       <TitleContainer>
-        Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões inesquecíveis
+        <p>Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões inesquecíveis</p>
       </TitleContainer>
       <ProjectsContainer>
         <TextField

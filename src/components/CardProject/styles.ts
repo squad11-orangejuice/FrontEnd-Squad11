@@ -32,7 +32,7 @@ export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.colors['$color-neutral-120']};
-  font-family: ${(props) => props.theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   margin-top: 1rem;
 `
 
@@ -67,7 +67,7 @@ export const Footer = styled.div`
   p {
     margin-left: 5px;
     color: ${({ theme }) => theme.colors['$color-neutral-110']};
-    font-family: ${({ theme }) => theme.fonts.regular};
+    font-weight: ${(props) => props.theme.fontWeight.regular};
     font-size: ${({ theme }) => theme.textSizes.subtitle1};
   }
 `
@@ -78,7 +78,7 @@ export const Tag = styled.div`
 
   background: ${(props) => props.theme.colors['$color-neutral-70']};
   color: ${({ theme }) => theme.colors['$color-neutral-100']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: 12px;
 `
 

@@ -30,7 +30,7 @@ export const AreaLogin = styled.div`
 
 export const Title = styled.h3`
   font-size: ${({ theme }) => theme.textSizes.h3};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   @media (max-width: 450px) {
     font-size: ${({ theme }) => theme.textSizes.h5};
     line-height: 24px;
@@ -47,7 +47,7 @@ export const AreaForm = styled('form')`
 `
 export const SubTitle = styled.h5`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.h5};
   font-weight: 400;
   line-height: 24px;
@@ -70,7 +70,7 @@ export const SubmitButton = styled(LoadingButton)`
 
 export const LinkText = styled(Link)`
   color: ${({ theme }) => theme.colors['$color-neutral-100']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.subtitle1};
   font-weight: 400;
   letter-spacing: 0.15px;

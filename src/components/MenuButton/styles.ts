@@ -35,7 +35,8 @@ export const MobileMenu = styled.div<StyledMobileMenuProps>`
 `
 
 export const MenuItem = styled(NavLink)`
-  font-family: ${(props) => props.theme.fonts.medium};
+  font-weight:  ${(props) => props.theme.fontWeight.medium};
+
   text-decoration: none;
   display: block;
   padding: 5px;
@@ -48,7 +49,7 @@ export const MenuItem = styled(NavLink)`
 
 export const StyledNavLink = styled(NavLink)`
   color: ${(props) => props.theme.colors['$color-neutral-60']};
-  font-family: ${(props) => props.theme.fonts.medium};
+  font-weight:  ${(props) => props.theme.fontWeight.medium};
   font-size: ${(props) => props.theme.textSizes.h6};
   text-decoration: none;
 

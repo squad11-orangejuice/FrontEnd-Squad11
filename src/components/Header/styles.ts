@@ -34,7 +34,7 @@ export const LeftContainer = styled.div`
 
 export const StyledNavLink = styled(NavLink)`
   color: ${(props) => props.theme.colors['$color-neutral-60']};
-  font-family: ${(props) => props.theme.fonts.medium};
+  font-weight:  ${(props) => props.theme.fontWeight.medium};
   font-size: ${(props) => props.theme.textSizes.h6};
   text-decoration: none;
 

@@ -28,7 +28,7 @@ export const AreaModal = styled.div`
 `
 export const Title = styled.h5`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.h5};
   line-height: 1.5rem;
   margin-bottom: 1.5rem;
@@ -56,7 +56,7 @@ export const AreaInput = styled.div`
 `
 export const SubTitle = styled.label`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.subtitle1};
   line-height: 1rem;
   letter-spacing: 0.15px;
@@ -73,7 +73,7 @@ export const InputImage = styled.div`
 `
 export const TextImageInput = styled.span`
   color: ${({ theme }) => theme.colors['$color-neutral-120']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.body2};
   line-height: 0.875rem;
   letter-spacing: 0.25px;

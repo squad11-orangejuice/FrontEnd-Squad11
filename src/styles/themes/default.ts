@@ -76,9 +76,10 @@ export const defaultTheme = {
     body2: '0.875rem',
     label: '1rem',
   },
-  fonts: {
-    regular: 'Roboto, sans-serif',
-    medium: 'Roboto Medium, sans-serif',
-    bold: 'Roboto Bold, sans-serif',
-  },
+  fontWeight: {
+    light: 300,
+    regular: 400,
+    medium: 500,
+    bold: 700,
+  }
 }
