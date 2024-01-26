@@ -22,6 +22,7 @@ import { mockInfo, blankProjectMock } from '@/utils/constants'
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
+  const [userId, setUserId] = useState('1');
   const [searchTerm, setSearchTerm] = useState('')
 
   const modalContext = useOpenCloseModal()
@@ -47,12 +48,14 @@ export function MyProjects() {
   const cardContent =
     filteredItems.length >= 1 ? (
       filteredItems.map((item) => {
-        return (
-          <CardProject
-            projectData={item}
-            onClick={() => { }}
-          />
-        )
+        if (userId === item.id) {
+          return (
+            <CardProject
+              projectData={item}
+              onClick={() => { }}
+            />
+          )
+        }
       })
     ) : (
       <CardProject projectData={blankProjectMock} onClick={() => { }} />
