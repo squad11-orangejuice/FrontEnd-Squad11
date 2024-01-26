@@ -7,6 +7,12 @@ import ImgView from '@/assets/ImgView.png'
 import { ImageContainer, HeaderContainerBottom, ContainerModalBody, ContentUser, FooterModal, HeaderContainerModal, LeftContainer, Tags, TagsProject, TitlePost, MainContainer, TitlePostBottom } from './styles';
 import useIsMobile from '@/hooks/useIsMobile';
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal';
+import { MockInfoType } from '@/utils/constants';
+
+interface ViewProjectModalProps {
+  modalData: MockInfoType;
+  isOpen: boolean;
+}
 
 const style = {
   position: 'absolute',
@@ -23,16 +29,9 @@ const style = {
   },
 };
 
-interface ViewProjectsModalProps {
-  userName: string;
-  url: string;
-}
-
-
-
-export function ViewProjectModal({ userName, url }: ViewProjectsModalProps) {
+export function ViewProjectModal({ modalData, isOpen = true }: ViewProjectModalProps) {
   const handleClose = () => { closeViewPostModal() }
-
+  const { userName, url, description, linkProject, tags, title } = modalData
   const isMobile = useIsMobile();
   const modalContext = useOpenCloseModal()
   const { closeViewPostModal, viewPostModalOpen } = modalContext
@@ -41,7 +40,7 @@ export function ViewProjectModal({ userName, url }: ViewProjectsModalProps) {
   return (
 
     <Modal
-      open={viewPostModalOpen}
+      open={isOpen}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -58,7 +57,7 @@ export function ViewProjectModal({ userName, url }: ViewProjectsModalProps) {
               </ContentUser>
             </LeftContainer>
             <div>
-              <TitlePost>  Ecommerce One Page </TitlePost>
+              <TitlePost>  {title} </TitlePost>
             </div>
 
             <TagsProject>
@@ -70,7 +69,7 @@ export function ViewProjectModal({ userName, url }: ViewProjectsModalProps) {
             <CloseIcon sx={isMobile ? { fontSize: 24, position: 'absolute', top: 90, right: 16 } : { fontSize: 24, position: 'absolute', top: 16, right: 16 }} />
           </button>
           <ContainerModalBody>
-            <TitlePostBottom>  Ecommerce One Page </TitlePostBottom>
+            <TitlePostBottom> {description} </TitlePostBottom>
             <ImageContainer>
               <img src={url} />
             </ImageContainer>
@@ -93,10 +92,10 @@ export function ViewProjectModal({ userName, url }: ViewProjectsModalProps) {
 
 
             <FooterModal>
-              <p> Temos o prazer de compartilhar com vocês uma variação do nosso primeiro recurso gratuito. É um modelo de IA. Tentamos redesenhar uma versão mais minimalista do nosso primeiro projeto.</p>
+              <p> {description} </p>
               <p>
                 Download
-                https://gumroad.com/products/wxCSL</p>
+                {linkProject}</p>
             </FooterModal>
           </ContainerModalBody>
         </MainContainer>
