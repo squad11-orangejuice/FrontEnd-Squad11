@@ -37,11 +37,7 @@ export function Discover() {
       ? filteredItems.map((item) => {
         return (
           <CardProject
-            url={item.url}
-            key={item.userName}
-            creatorId={3}
-            tags={item.tags}
-            name={item.userName}
+            projectData={item}
             onClick={() => handleOnClickCard(item)}
           />
         )
@@ -65,7 +61,7 @@ export function Discover() {
       </ProjectsContainer>
 
       <CardDisplay>{cardContent}</CardDisplay>
-      {viewPostModalOpen && <ViewProjectModal modalData={modalData} />}
+      {viewPostModalOpen && <ViewProjectModal modalData={modalData} isOpen={false} />}
 
     </>
   )

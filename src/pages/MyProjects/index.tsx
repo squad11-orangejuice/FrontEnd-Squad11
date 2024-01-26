@@ -17,7 +17,7 @@ import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
-import { mockInfo } from '@/utils/constants'
+import { mockInfo, blankProjectMock } from '@/utils/constants'
 
 
 export function MyProjects() {
@@ -49,21 +49,13 @@ export function MyProjects() {
       filteredItems.map((item) => {
         return (
           <CardProject
-            id={item.id}
-            url={item.url}
-            linkProject={item.linkProject}
-            key={item.id}
-            creatorId={1}
-            tags={item.tags}
-            name={item.userName}
-            title={item.title}
-            description={item.description}
+            projectData={item}
             onClick={() => { }}
           />
         )
       })
     ) : (
-      <CardProject tags={[]} onClick={() => { }} />
+      <CardProject projectData={blankProjectMock} onClick={() => { }} />
     )
 
   return (

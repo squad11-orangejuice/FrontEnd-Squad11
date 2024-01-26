@@ -8,6 +8,17 @@ export interface MockInfoType {
   userName: string
 }
 
+export const blankProjectMock = {
+  id: '',
+  title: '',
+  linkProject: '',
+  url: '',
+  userName: '',
+  tags: [],
+  description: '',
+}
+
+
 export const mockInfo: Array<MockInfoType> = [
   // Info Para Testar Cards
   {

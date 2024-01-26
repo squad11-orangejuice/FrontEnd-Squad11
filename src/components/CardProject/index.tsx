@@ -13,31 +13,21 @@ import ImageUser from '@/assets/ImageUser.png'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import EditProjectButton from '../EditProjectButton'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
+import { ProjectData } from '@/context/ModalContext'
 
-interface CarProjectProps {
-  id?: string
-  url?: string
-  name?: string
-  creatorId?: number
-  tags: Array<string>
-  title?: string
-  description?: string
-  linkProject?: string
+interface CardProjectProps {
+  projectData: ProjectData;
+  onClick: () => void
 }
 export function CardProject({
-  id = '',
-  url = '',
-  creatorId,
-  tags,
-  name = '',
-  description = '',
-  title = '',
-  linkProject = '',
-}: CarProjectProps) {
-  const [userId, setUserId] = useState(1)
-
+  projectData,
+  onClick,
+}: CardProjectProps) {
+  const [userId, setUserId] = useState('1')
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const modalContext = useOpenCloseModal()
   const { openEditModal, openDeleteModal } = modalContext
+  const { id, description, url, tags, title, linkProject, userName } = projectData
 
   function handleClickOpenEditModal() {
     openEditModal({
@@ -47,6 +37,7 @@ export function CardProject({
       tags,
       title,
       linkProject,
+      userName,
     })
   }
 
@@ -58,19 +49,22 @@ export function CardProject({
       tags,
       title,
       linkProject,
+      userName,
     })
   }
 
+  function handleOnClick() {
+    onClick();
+  }
+
   const shouldRenderEditButton =
-    userId === creatorId ? (
+    userId === id ? (
       <EditProjectButton
         openModalEdit={handleClickOpenEditModal}
         openModalDelete={handleClickOpenDeleteModal}
       />
     ) : null
 
-  // remover console.log assim que possivel
-  console.log(setUserId)
 
   const tagContent = tags.map((item) => {
     return <Tag key={item}>{item}</Tag>
@@ -95,14 +89,14 @@ export function CardProject({
 
   return (
     <div>
-      <CardProjectContainer>
+      <CardProjectContainer onClick={handleOnClick}>
         {shouldRenderEditButton}
         {cardContent}
         {url ? (
           <Footer>
             <div>
               <img src={ImageUser} alt="Foto do usuário" />
-              <p>{name}</p>
+              <p>{userName}</p>
               <p>12/23</p>
             </div>
             <div>{tagContent}</div>
