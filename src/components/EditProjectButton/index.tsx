@@ -5,8 +5,13 @@ import Menu from '@mui/material/Menu'
 import ModeIcon from '@mui/icons-material/Mode'
 import { StyledMenuItem } from './styles'
 
-export default function BasicMenu() {
+type Props = {
+  openModal: () => void
+}
+
+export default function BasicMenu({ openModal }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -43,7 +48,7 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <StyledMenuItem onClick={handleClose}>Editar</StyledMenuItem>
+        <StyledMenuItem onClick={() => openModal()}>Editar</StyledMenuItem>
         <StyledMenuItem onClick={handleClose}>Excluir</StyledMenuItem>
       </Menu>
     </div>
