@@ -10,7 +10,7 @@ export const ContainerUser = styled.div`
   @media only screen and (max-width: 600px) {
     flex-direction: column;
   }
-`
+`;
 
 export const UserPerfil = styled.div`
   display: flex;
@@ -23,28 +23,28 @@ export const UserPerfil = styled.div`
     border-radius: 300px;
     margin-right: 2.62rem;
   }
-`
+`;
 
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
   gap: 0.5rem;
-`
+`;
 
 export const UserNome = styled.h2`
   font-weight:  ${(props) => props.theme.fontWeight.regular};
 
   font-size: ${(props) => props.theme.textSizes.h5};
   color: ${(props) => props.theme.colors['$color-neutral-120']};
-`
+`;
 
 export const UserLocal = styled.p`
   margin: 0.03rem 0;
   font-weight:  ${(props) => props.theme.fontWeight.regular};
   font-size: ${(props) => props.theme.textSizes.subtitle1};
   color: ${(props) => props.theme.colors['$color-neutral-90']};
-`
+`;
 
 export const BotaoAdicionarProjeto = styled.button`
   padding: 0.5rem, 1.375rem, 0.5rem, 1.375rem;
@@ -69,7 +69,7 @@ export const BotaoAdicionarProjeto = styled.button`
     cursor: default;
     background: #d3d3d3;
   }
-`
+`;
 
 export const MyProjectsContainer = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ export const MyProjectsContainer = styled.div`
   @media only screen and (min-width: 601px) {
     max-width: 50%;
   }
-`
+`;
 
 export const CardDisplay = styled.div`
   flex-wrap: wrap;
@@ -95,4 +95,4 @@ export const CardDisplay = styled.div`
   @media only screen and (max-width: 600px) {
     flex-direction: column;
   }
-`
+`;

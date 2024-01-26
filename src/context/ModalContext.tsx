@@ -1,12 +1,13 @@
 import { ReactNode, createContext, useState } from 'react'
 
-interface ProjectData {
+export interface ProjectData {
   id: string
   title: string
   tags: string[]
   linkProject: string
   url: string
   description: string
+  userName: string
 }
 
 interface ModalContextType {
