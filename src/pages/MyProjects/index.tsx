@@ -12,7 +12,7 @@ import {
   UserPerfil,
 } from './styles'
 import TextField from '@mui/material/TextField'
-import { CardProject } from '@/components/CardProject'
+import { CardProject } from '@/components/CardProjects'
 
 const mockInfo = [
   // Info Para Testar Cards
