@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
   outline: none;
+  font-family: 'Roboto';
 }
 body {
   background: ${(props) => props.theme.colors['$color-neutral-60']};

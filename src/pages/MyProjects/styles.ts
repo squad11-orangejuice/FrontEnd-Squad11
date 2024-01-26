@@ -33,14 +33,15 @@ export const UserInfo = styled.div`
 `;
 
 export const UserNome = styled.h2`
-  font-family: ${(props) => props.theme.fonts.regular};
+  font-weight:  ${(props) => props.theme.fontWeight.regular};
+
   font-size: ${(props) => props.theme.textSizes.h5};
   color: ${(props) => props.theme.colors['$color-neutral-120']};
 `;
 
 export const UserLocal = styled.p`
   margin: 0.03rem 0;
-  font-family: ${(props) => props.theme.fonts.regular};
+  font-weight:  ${(props) => props.theme.fontWeight.regular};
   font-size: ${(props) => props.theme.textSizes.subtitle1};
   color: ${(props) => props.theme.colors['$color-neutral-90']};
 `;
@@ -50,7 +51,7 @@ export const BotaoAdicionarProjeto = styled.button`
   width: 13rem;
   height: 2.262rem;
   border-radius: 4px;
-  font-family: ${(props) => props.theme.fonts.bold};
+  font-weight:  ${(props) => props.theme.fontWeight.medium};
   font-size: ${(props) => props.theme.textSizes.button};
   border: none;
   color: white;
@@ -78,7 +79,7 @@ export const MyProjectsContainer = styled.div`
   margin-right: 2rem;
   gap: 1rem;
   color: ${(props) => props.theme.colors['$color-neutral-130']};
-  font-family: ${(props) => props.theme.fonts.medium};
+  font-weight:  ${(props) => props.theme.fontWeight.medium};
   font-size: ${(props) => props.theme.textSizes.h6};
 
   @media only screen and (min-width: 601px) {

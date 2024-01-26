@@ -66,7 +66,7 @@ export const Logo = styled.img`
 
 export const Title = styled.span`
   color: rgba(0, 0, 0, 0.54);
-  font-family: ${({ theme }) => theme.fonts.medium};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
   font-size: ${({ theme }) => theme.textSizes.body2};
 `
 
