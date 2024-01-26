@@ -1,43 +1,43 @@
 export interface MockInfoType {
-  id: string;
-  titulo: string;
-  linkProject: string;
-  url: string;
-  nome: string;
-  tags: Array<string>,
-  descricao: string;
+  id: string
+  title: string
+  tags: string[]
+  linkProject: string
+  url: string
+  description: string
+  userName: string
 }
 
 export const mockInfo: Array<MockInfoType> = [
   // Info Para Testar Cards
   {
     id: 'a',
-    titulo: 'Aqui um titulo qualquer',
+    title: 'Aqui um titulo qualquer',
     linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Alanna Silva',
+    userName: 'Alanna Silva',
     tags: ['UX', 'Web'],
-    descricao:
+    description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
   },
   {
     id: 'b',
-    titulo: 'Aqui um titulo qualquer1',
+    title: 'Aqui um titulo qualquer1',
     linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Carolina',
+    userName: 'Carolina',
     tags: ['UX', 'UI'],
-    descricao:
+    description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
   },
   {
     id: 'c',
-    titulo: 'Aqui um titulo qualquer2',
+    title: 'Aqui um titulo qualquer2',
     linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Douglas',
+    userName: 'Douglas',
     tags: ['UI', 'Web'],
-    descricao:
+    description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
   },
 ]

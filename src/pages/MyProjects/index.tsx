@@ -55,9 +55,9 @@ export function MyProjects() {
             key={item.id}
             creatorId={1}
             tags={item.tags}
-            name={item.nome}
-            title={item.titulo}
-            description={item.descricao}
+            name={item.userName}
+            title={item.title}
+            description={item.description}
             onClick={() => { }}
           />
         )
