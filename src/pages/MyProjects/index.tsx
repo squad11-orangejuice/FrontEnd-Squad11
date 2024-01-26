@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import { Header } from '@/components/Header'
 import ImageUser from '@/assets/ImageUser.png'
@@ -13,29 +14,47 @@ import {
 } from './styles'
 import TextField from '@mui/material/TextField'
 import { CardProject } from '@/components/CardProject'
+import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
+import { ProjectFormModal } from '@/components/ProjectFormModal'
 
 const mockInfo = [
   // Info Para Testar Cards
   {
+    titulo: 'Aqui um titulo qualquer',
+    linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Alanna Silva',
-    tags: ['UX', 'WEB'],
+    nome: 'Alanna Silva',
+    tags: ['UX', 'Web'],
+    descricao:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
   },
   {
+    titulo: 'Aqui um titulo qualquer1',
+    linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Carolina',
+    nome: 'Carolina',
     tags: ['UX', 'UI'],
+    descricao:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
   },
   {
+    titulo: 'Aqui um titulo qualquer2',
+    linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Douglas',
-    tags: ['UI', 'WEB'],
+    nome: 'Douglas',
+    tags: ['UI', 'Web'],
+    descricao:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
   },
 ]
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
   const [searchTerm, setSearchTerm] = useState('')
+
+  const modalContext = useOpenCloseModal()
+
+  const { editModalOpen } = modalContext
 
   const shouldDisableButton = items.length === 0
 
@@ -55,14 +74,17 @@ export function MyProjects() {
 
   const cardContent =
     filteredItems.length >= 1 ? (
-      filteredItems.map((item) => {
+      filteredItems.map((item, index) => {
         return (
           <CardProject
             url={item.url}
-            key={item.name}
+            linkProject={item.linkProject}
+            key={index}
             creatorId={1}
             tags={item.tags}
-            name={item.name}
+            name={item.nome}
+            title={item.titulo}
+            description={item.descricao}
           />
         )
       })
@@ -101,6 +123,7 @@ export function MyProjects() {
       </MyProjectsContainer>
 
       <CardDisplay>{cardContent}</CardDisplay>
+      {editModalOpen && <ProjectFormModal titleModal="Editar projeto " />}
     </>
   )
 }
