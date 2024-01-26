@@ -1,6 +1,17 @@
 import LoadingButton from '@mui/lab/LoadingButton'
 import Button from '@mui/material/Button'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`
 
 export const ProjectFormModalContainer = styled.div`
   align-items: center;
@@ -11,7 +22,7 @@ export const ProjectFormModalContainer = styled.div`
   left: 0;
   top: 0;
   padding: 0 1.5rem;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   z-index: 999;
 `
@@ -21,6 +32,7 @@ export const AreaModal = styled.div`
   height: 522px;
   padding: 1.5rem 2rem;
   width: 890px;
+  animation: ${fadeIn} 0.3s ease;
   @media (max-width: 890px) {
     height: auto;
     padding: 1.5rem;
