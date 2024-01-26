@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Header } from '@/components/Header'
 import TextField from '@mui/material/TextField'
 import { ProjectsContainer, CardDisplay, TitleContainer } from './styles'
-import { CardProject } from '@/components/CardProjects'
+import { CardProject } from '@/components/CardProject'
 
 const mockInfo = [
   // Info Para Testar Cards

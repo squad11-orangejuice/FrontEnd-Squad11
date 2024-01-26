@@ -13,7 +13,7 @@ import {
   UserPerfil,
 } from './styles'
 import TextField from '@mui/material/TextField'
-import { CardProject } from '@/components/CardProjects'
+import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
