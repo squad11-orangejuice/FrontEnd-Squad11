@@ -1,44 +1,31 @@
 import {
   HeaderContainer,
-  Tab,
   TabsContainer,
   LeftContainer,
   RightContainer,
-  UserContainer,
-  NotificacaoContainer,
   StyledNavLink,
+  Logo,
+  UserImgContainer,
 } from './styles'
 import LogoOrange from '@/assets/LogoOrange.png'
 import ImageUser from '@/assets/ImageUser.png'
-import iconNotificacao from '@/assets/iconNotificacao.svg'
 import MenuButton from '../MenuButton'
+import NotificationsIcon from '@mui/icons-material/Notifications'
 
 export function Header() {
   return (
     <HeaderContainer>
       <LeftContainer>
         <MenuButton />
-        <img src={LogoOrange} alt="Orange logo" />
         <TabsContainer>
-          <div>
-            <StyledNavLink to="/projetos">
-              <Tab>Meus Projetos</Tab>
-            </StyledNavLink>
-          </div>
-          <div>
-            <StyledNavLink to="/descobrir">
-              <Tab>Descobrir</Tab>
-            </StyledNavLink>
-          </div>
+          <Logo src={LogoOrange} alt="Orange logo" />
+          <StyledNavLink to="/projetos">Meus Projetos</StyledNavLink>
+          <StyledNavLink to="/descobrir">Descobrir</StyledNavLink>
         </TabsContainer>
       </LeftContainer>
       <RightContainer>
-        <UserContainer>
-          <img src={ImageUser} alt="Foto do usuário" />
-        </UserContainer>
-        <NotificacaoContainer>
-          <img src={iconNotificacao} alt="Icone de notificação" />
-        </NotificacaoContainer>
+        <UserImgContainer src={ImageUser} alt="Foto do usuário" />
+        <NotificationsIcon sx={{ fontSize: 24, color: '#FCFDFF' }} />
       </RightContainer>
     </HeaderContainer>
   )
