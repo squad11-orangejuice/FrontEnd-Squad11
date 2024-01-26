@@ -11,7 +11,7 @@ export const ProjectFormModalContainer = styled.div`
   left: 0;
   top: 0;
   padding: 0 1.5rem;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   z-index: 999;
 `
