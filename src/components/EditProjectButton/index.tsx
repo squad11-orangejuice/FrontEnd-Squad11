@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import Menu from '@mui/material/Menu'
 import ModeIcon from '@mui/icons-material/Mode'
+
 import { ArrowIconEdit, ButtonIconEdit, StyledMenuItem } from './styles'
 
 type Props = {
@@ -44,6 +45,7 @@ export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
           }}
         />
       </ButtonIconEdit>
+
       {anchorEl && <ArrowIconEdit />}
 
       <Menu
@@ -72,10 +74,24 @@ export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
           },
         }}
       >
-        <StyledMenuItem onClick={handleClickOpenEditModal}>
+        <StyledMenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClickOpenEditModal}
+        >
           Editar
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleClickOpenDeleteModal}>
+        <StyledMenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClickOpenDeleteModal}
+        >
           Excluir
         </StyledMenuItem>
       </Menu>

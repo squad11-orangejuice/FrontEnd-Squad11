@@ -31,7 +31,4 @@ export const StyledMenuItem = styled(MenuItem)`
   position: absolute;
   width: 208px;
   padding: 4px;
-  &:hover {
-    background: #ffcc99;
-  }
 `
