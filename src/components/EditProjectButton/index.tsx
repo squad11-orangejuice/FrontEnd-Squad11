@@ -5,13 +5,29 @@ import Menu from '@mui/material/Menu'
 import ModeIcon from '@mui/icons-material/Mode'
 import { StyledMenuItem } from './styles'
 
-export default function BasicMenu() {
+type Props = {
+  openModalEdit: () => void
+  openModalDelete: () => void
+}
+
+export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleClickOpenEditModal = () => {
+    openModalEdit()
+    setAnchorEl(null)
+  }
+
+  const handleClickOpenDeleteModal = () => {
+    openModalDelete()
     setAnchorEl(null)
   }
 
@@ -43,8 +59,12 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <StyledMenuItem onClick={handleClose}>Editar</StyledMenuItem>
-        <StyledMenuItem onClick={handleClose}>Excluir</StyledMenuItem>
+        <StyledMenuItem onClick={handleClickOpenEditModal}>
+          Editar
+        </StyledMenuItem>
+        <StyledMenuItem onClick={handleClickOpenDeleteModal}>
+          Excluir
+        </StyledMenuItem>
       </Menu>
     </div>
   )

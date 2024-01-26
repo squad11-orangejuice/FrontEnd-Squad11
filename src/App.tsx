@@ -4,6 +4,7 @@ import { GlobalStyle } from './styles/global'
 import { Router } from './Router'
 import { BrowserRouter } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { ModalContextProvider } from './context/ModalContext'
 
 export function App() {
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
@@ -13,7 +14,9 @@ export function App() {
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyle />
         <BrowserRouter>
-          <Router />
+          <ModalContextProvider>
+            <Router />
+          </ModalContextProvider>
         </BrowserRouter>
       </ThemeProvider>
     </GoogleOAuthProvider>

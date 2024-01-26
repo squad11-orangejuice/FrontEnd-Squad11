@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react'
 import * as z from 'zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
@@ -23,15 +24,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Autocomplete from '@mui/material/Autocomplete'
 import { tags } from '@/utils/tags'
 import FormHelperText from '@mui/material/FormHelperText'
+import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 
 type Props = {
   titleModal: string
-  titleProject?: string
-  tagsProject?: string[]
-  linkProject?: string
-  descriptionProject?: string
-  imageLink?: string | null
-  closedModal: () => void
 }
 
 const validationSchema = z.object({
@@ -46,17 +42,13 @@ const validationSchema = z.object({
 
 type FormInputs = z.infer<typeof validationSchema>
 
-export function ProjectFormModal({
-  titleModal,
-  descriptionProject = '',
-  linkProject = '',
-  tagsProject = [],
-  titleProject,
-  imageLink = null,
-  closedModal,
-}: Props) {
+export function ProjectFormModal({ titleModal }: Props) {
   const [loading, setLoading] = useState(false)
-  const [previewImage, setPreviewImage] = useState<string | null>(imageLink)
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+
+  const modalContext = useOpenCloseModal()
+  const { closeEditModal, projectData } = modalContext
 
   const {
     register,
@@ -91,6 +83,24 @@ export function ProjectFormModal({
       reader.readAsDataURL(newImage)
     }
   }
+  const handleTagsChange = (_: unknown, value: string[]) => {
+    setValue('tags', value)
+    setSelectedTags(value)
+  }
+
+  useEffect(() => {
+    if (projectData && projectData.url) {
+      console.log(projectData.url)
+      setValue('imagem', projectData.url)
+      setValue('title', projectData.title)
+      setValue('tags', projectData.tags)
+      setValue('description', projectData.description)
+      setValue('link', projectData.linkProject)
+
+      setPreviewImage(projectData.url)
+      setSelectedTags(projectData.tags)
+    }
+  }, [projectData])
 
   return (
     <ProjectFormModalContainer>
@@ -143,7 +153,7 @@ export function ProjectFormModal({
                 variant="contained"
                 color="primary"
                 size="large"
-                onClick={() => closedModal()}
+                onClick={() => closeEditModal()}
               >
                 CANCELAR
               </ButtonCancel>
@@ -157,7 +167,7 @@ export function ProjectFormModal({
               {...register('title')}
               error={!!errors.title}
               helperText={errors.title?.message}
-              defaultValue={titleProject || ''}
+              defaultValue={projectData?.title ?? ''}
             />
             <div>
               <Autocomplete
@@ -166,10 +176,10 @@ export function ProjectFormModal({
                 {...register('tags')}
                 options={tags}
                 getOptionLabel={(option) => option}
-                defaultValue={tagsProject}
+                value={selectedTags}
                 filterSelectedOptions
                 renderInput={(params) => <TextField {...params} label="Tags" />}
-                onChange={(_, value) => setValue('tags', value)}
+                onChange={handleTagsChange}
               />
               {errors.tags && (
                 <FormHelperText sx={{ marginLeft: '0.8rem', color: '#d32f2f' }}>
@@ -185,7 +195,7 @@ export function ProjectFormModal({
               {...register('link')}
               error={!!errors.link}
               helperText={errors.link?.message}
-              defaultValue={linkProject}
+              defaultValue={projectData?.linkProject ?? ''}
             />
             <TextField
               sx={{ width: '100%', padding: 0 }}
@@ -197,7 +207,7 @@ export function ProjectFormModal({
               rows={3.8}
               error={!!errors.description}
               helperText={errors.description?.message}
-              defaultValue={descriptionProject}
+              defaultValue={projectData?.description ?? ''}
             />
           </AreaInput>
         </AreaForm>
