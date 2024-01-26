@@ -22,9 +22,14 @@ export const ProjectFormModalContainer = styled.div`
   left: 0;
   top: 0;
   padding: 0 1.5rem;
+  padding-top: 11.125rem;
   position: fixed;
   width: 100vw;
+
   z-index: 999;
+  @media (max-width: 768px) {
+    overflow-y: auto;
+  }
 `
 
 export const AreaModal = styled.div`
