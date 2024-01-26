@@ -6,10 +6,11 @@ import ModeIcon from '@mui/icons-material/Mode'
 import { StyledMenuItem } from './styles'
 
 type Props = {
-  openModal: () => void
+  openModalEdit: () => void
+  openModalDelete: () => void
 }
 
-export default function BasicMenu({ openModal }: Props) {
+export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   const open = Boolean(anchorEl)
@@ -21,7 +22,12 @@ export default function BasicMenu({ openModal }: Props) {
   }
 
   const handleClickOpenEditModal = () => {
-    openModal()
+    openModalEdit()
+    setAnchorEl(null)
+  }
+
+  const handleClickOpenDeleteModal = () => {
+    openModalDelete()
     setAnchorEl(null)
   }
 
@@ -56,7 +62,9 @@ export default function BasicMenu({ openModal }: Props) {
         <StyledMenuItem onClick={handleClickOpenEditModal}>
           Editar
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleClose}>Excluir</StyledMenuItem>
+        <StyledMenuItem onClick={handleClickOpenDeleteModal}>
+          Excluir
+        </StyledMenuItem>
       </Menu>
     </div>
   )

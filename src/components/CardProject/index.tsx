@@ -15,6 +15,7 @@ import EditProjectButton from '../EditProjectButton'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 
 interface CarProjectProps {
+  id?: string
   url?: string
   name?: string
   creatorId?: number
@@ -24,6 +25,7 @@ interface CarProjectProps {
   linkProject?: string
 }
 export function CardProject({
+  id = '',
   url = '',
   creatorId,
   tags,
@@ -35,11 +37,22 @@ export function CardProject({
   const [userId, setUserId] = useState(1)
 
   const modalContext = useOpenCloseModal()
-  const { openEditModal } = modalContext
+  const { openEditModal, openDeleteModal } = modalContext
 
-  function handleOpenEdit() {
-    console.log('aqui')
+  function handleClickOpenEditModal() {
     openEditModal({
+      id,
+      description,
+      url,
+      tags,
+      title,
+      linkProject,
+    })
+  }
+
+  function handleClickOpenDeleteModal() {
+    openDeleteModal({
+      id,
       description,
       url,
       tags,
@@ -50,7 +63,10 @@ export function CardProject({
 
   const shouldRenderEditButton =
     userId === creatorId ? (
-      <EditProjectButton openModal={handleOpenEdit} />
+      <EditProjectButton
+        openModalEdit={handleClickOpenEditModal}
+        openModalDelete={handleClickOpenDeleteModal}
+      />
     ) : null
 
   // remover console.log assim que possivel
