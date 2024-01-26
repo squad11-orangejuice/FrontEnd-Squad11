@@ -17,40 +17,8 @@ import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
+import { mockInfo } from '@/utils/constants'
 
-const mockInfo = [
-  // Info Para Testar Cards
-  {
-    id: 'a',
-    titulo: 'Aqui um titulo qualquer',
-    linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Alanna Silva',
-    tags: ['UX', 'Web'],
-    descricao:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
-  },
-  {
-    id: 'b',
-    titulo: 'Aqui um titulo qualquer1',
-    linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Carolina',
-    tags: ['UX', 'UI'],
-    descricao:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
-  },
-  {
-    id: 'c',
-    titulo: 'Aqui um titulo qualquer2',
-    linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Douglas',
-    tags: ['UI', 'Web'],
-    descricao:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
-  },
-]
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
@@ -90,11 +58,12 @@ export function MyProjects() {
             name={item.nome}
             title={item.titulo}
             description={item.descricao}
+            onClick={() => { }}
           />
         )
       })
     ) : (
-      <CardProject tags={[]} />
+      <CardProject tags={[]} onClick={() => { }} />
     )
 
   return (
