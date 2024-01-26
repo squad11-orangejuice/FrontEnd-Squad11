@@ -72,10 +72,24 @@ export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
           },
         }}
       >
-        <StyledMenuItem onClick={handleClickOpenEditModal}>
+        <StyledMenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClickOpenEditModal}
+        >
           Editar
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleClickOpenDeleteModal}>
+        <StyledMenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClickOpenDeleteModal}
+        >
           Excluir
         </StyledMenuItem>
       </Menu>
