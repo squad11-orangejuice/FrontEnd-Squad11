@@ -14,6 +14,7 @@ import CollectionsIcon from '@mui/icons-material/Collections'
 import EditProjectButton from '../EditProjectButton'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectData } from '@/context/ModalContext'
+import { ViewProjectModal } from '../ViewProjectModal'
 
 interface CardProjectProps {
   projectData: ProjectData;
@@ -53,7 +54,12 @@ export function CardProject({
     })
   }
 
+  function handleOnModalClose() {
+    setIsModalOpen(false);
+  }
+
   function handleOnClick() {
+    setIsModalOpen(true);
     onClick();
   }
 
@@ -88,21 +94,24 @@ export function CardProject({
   )
 
   return (
-    <div>
-      <CardProjectContainer onClick={handleOnClick}>
-        {shouldRenderEditButton}
-        {cardContent}
-        {url ? (
-          <Footer>
-            <div>
-              <img src={ImageUser} alt="Foto do usuário" />
-              <p>{userName}</p>
-              <p>12/23</p>
-            </div>
-            <div>{tagContent}</div>
-          </Footer>
-        ) : null}
-      </CardProjectContainer>
-    </div>
+    <>
+      <div>
+        <CardProjectContainer onClick={handleOnClick}>
+          {shouldRenderEditButton}
+          {cardContent}
+          {url ? (
+            <Footer>
+              <div>
+                <img src={ImageUser} alt="Foto do usuário" />
+                <p>{userName}</p>
+                <p>12/23</p>
+              </div>
+              <div>{tagContent}</div>
+            </Footer>
+          ) : null}
+        </CardProjectContainer>
+      </div>
+      {isModalOpen && <ViewProjectModal modalData={projectData} isOpen={isModalOpen} onClose={handleOnModalClose} />}
+    </>
   )
 }

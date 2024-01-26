@@ -12,6 +12,7 @@ import { MockInfoType } from '@/utils/constants';
 interface ViewProjectModalProps {
   modalData: MockInfoType;
   isOpen: boolean;
+  onClose: () => void
 }
 
 const style = {
@@ -29,16 +30,15 @@ const style = {
   },
 };
 
-export function ViewProjectModal({ modalData, isOpen = true }: ViewProjectModalProps) {
-  const handleClose = () => { closeViewPostModal() }
+export function ViewProjectModal({ modalData, isOpen, onClose }: ViewProjectModalProps) {
   const { userName, url, description, linkProject, tags, title } = modalData
   const isMobile = useIsMobile();
-  const modalContext = useOpenCloseModal()
-  const { closeViewPostModal, viewPostModalOpen } = modalContext
+  const handleClose = () => {
+    onClose()
+  }
 
 
   return (
-
     <Modal
       open={isOpen}
       onClose={handleClose}

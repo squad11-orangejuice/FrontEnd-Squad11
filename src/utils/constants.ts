@@ -23,9 +23,9 @@ export const mockInfo: Array<MockInfoType> = [
   // Info Para Testar Cards
   {
     id: '1',
-    title: 'Aqui um titulo qualquer',
+    title: 'Aqui um titulo qualquer 1',
     linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
+    url: 'https://images4.alphacoders.com/134/1341419.png',
     userName: 'Alanna Silva',
     tags: ['UX', 'Web'],
     description:
@@ -33,9 +33,9 @@ export const mockInfo: Array<MockInfoType> = [
   },
   {
     id: '1',
-    title: 'Aqui um titulo qualquer1',
+    title: 'Aqui um titulo qualquer 2',
     linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
+    url: 'https://images.photowall.com/interiors/60869/landscape/wallpaper/room45.jpg?w=2000&q=80',
     userName: 'Carolina',
     tags: ['UX', 'UI'],
     description:
@@ -43,9 +43,9 @@ export const mockInfo: Array<MockInfoType> = [
   },
   {
     id: '1',
-    title: 'Aqui um titulo qualquer2',
+    title: 'Aqui um titulo qualquer 3',
     linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
+    url: 'https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     userName: 'Douglas',
     tags: ['UI', 'Web'],
     description:
@@ -54,7 +54,7 @@ export const mockInfo: Array<MockInfoType> = [
 
   {
     id: '5',
-    title: 'Aqui um titulo qualquer4',
+    title: 'Aqui um titulo qualquer 4',
     linkProject: 'https://www.google.com/',
     url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
     userName: 'Douglas',
@@ -65,9 +65,9 @@ export const mockInfo: Array<MockInfoType> = [
 
   {
     id: '4',
-    title: 'Aqui um titulo qualquer5',
+    title: 'Aqui um titulo qualquer 5',
     linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
+    url: 'https://d150u0abw3r906.cloudfront.net/wp-content/uploads/2021/10/image2-2-1024x649.png',
     userName: 'Douglas',
     tags: ['UI', 'Web'],
     description:
@@ -75,9 +75,9 @@ export const mockInfo: Array<MockInfoType> = [
   },
   {
     id: '2',
-    title: 'Aqui um titulo qualquer6',
+    title: 'Aqui um titulo qualquer 6',
     linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
+    url: 'https://as1.ftcdn.net/v2/jpg/05/75/80/34/1000_F_575803464_pqACzSefEtLVNUEsgjkdj77OYopRNmuZ.jpg',
     userName: 'Douglas',
     tags: ['UI', 'Web'],
     description:
