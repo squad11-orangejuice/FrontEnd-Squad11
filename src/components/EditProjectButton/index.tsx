@@ -20,6 +20,11 @@ export default function BasicMenu({ openModal }: Props) {
     setAnchorEl(null)
   }
 
+  const handleClickOpenEditModal = () => {
+    openModal()
+    setAnchorEl(null)
+  }
+
   return (
     <div>
       <Button
@@ -48,7 +53,9 @@ export default function BasicMenu({ openModal }: Props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <StyledMenuItem onClick={() => openModal()}>Editar</StyledMenuItem>
+        <StyledMenuItem onClick={handleClickOpenEditModal}>
+          Editar
+        </StyledMenuItem>
         <StyledMenuItem onClick={handleClose}>Excluir</StyledMenuItem>
       </Menu>
     </div>
