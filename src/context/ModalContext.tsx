@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useState } from 'react'
 
 interface ProjectData {
+  id: string
   title: string
   tags: string[]
   linkProject: string
@@ -11,7 +12,7 @@ interface ProjectData {
 interface ModalContextType {
   projectData: ProjectData | null
   deleteModalOpen: boolean
-  openDeleteModal: () => void
+  openDeleteModal: (projectData: ProjectData) => void
   closeDeleteModal: () => void
   editModalOpen: boolean
   openEditModal: (projectData: ProjectData) => void
@@ -19,6 +20,9 @@ interface ModalContextType {
   viewPostModalOpen: boolean
   openViewPostModal: () => void
   closeViewPostModal: () => void
+  requestSucessModalOpen: boolean
+  OpenRequestSucessModal: () => void
+  closeRequestSucessModal: () => void
 }
 
 interface ModalContextProviderProps {
@@ -31,10 +35,17 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
   const [viewPostModalOpen, setViewPostModalOpen] = useState(false)
+  const [requestSucessModalOpen, setRequestSucessModalOpen] = useState(false)
   const [projectData, setProjectData] = useState<ProjectData | null>(null)
 
-  const openDeleteModal = () => setDeleteModalOpen(true)
-  const closeDeleteModal = () => setDeleteModalOpen(false)
+  const openDeleteModal = (projectData: ProjectData) => {
+    setDeleteModalOpen(true)
+    setProjectData(projectData)
+  }
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false)
+    setProjectData(null)
+  }
 
   const openEditModal = (projectData: ProjectData) => {
     setEditModalOpen(true)
@@ -47,6 +58,9 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
 
   const openViewPostModal = () => setViewPostModalOpen(true)
   const closeViewPostModal = () => setViewPostModalOpen(false)
+
+  const OpenRequestSucessModal = () => setRequestSucessModalOpen(true)
+  const closeRequestSucessModal = () => setRequestSucessModalOpen(false)
 
   return (
     <ModalContext.Provider
@@ -61,6 +75,9 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
         viewPostModalOpen,
         openViewPostModal,
         closeViewPostModal,
+        requestSucessModalOpen,
+        OpenRequestSucessModal,
+        closeRequestSucessModal,
       }}
     >
       {children}
