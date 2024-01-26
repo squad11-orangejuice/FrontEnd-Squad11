@@ -8,25 +8,19 @@ import {
   SubTitle,
   Title,
 } from './styles'
+import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 
-type Props = {
-  idProject: string
-  isClosed: () => void
-  openModalSucess: () => void
-}
-
-export function DeleteProject({ isClosed, idProject, openModalSucess }: Props) {
+export function DeleteProjectModal() {
   const [loading, setLoading] = useState(false)
 
-  function handleClosedModal() {
-    isClosed()
-  }
+  const modalContext = useOpenCloseModal()
+  const { closeDeleteModal, OpenRequestSucessModal } = modalContext
 
   async function handleDeleteProject() {
     setLoading(true)
-    console.log(idProject)
     setLoading(false)
-    openModalSucess()
+
+    OpenRequestSucessModal()
   }
 
   return (
@@ -50,7 +44,7 @@ export function DeleteProject({ isClosed, idProject, openModalSucess }: Props) {
             variant="contained"
             color="error"
             size="large"
-            onClick={handleClosedModal}
+            onClick={() => closeDeleteModal()}
           >
             CANCELAR
           </ButtonCancel>
