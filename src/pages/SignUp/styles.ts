@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import LoadingButton from '@mui/lab/LoadingButton'
 import Alert from '@mui/material/Alert'
 
 export const SignUpContainer = styled.main`
@@ -66,17 +65,6 @@ export const AreaForm = styled('form')`
   width: 100%;
   & > div:nth-child(n + 3) {
     grid-column: span 2;
-  }
-`
-
-export const SubmitButton = styled(LoadingButton)`
-  grid-column: span 2;
-  && {
-    background-color: ${({ theme }) => theme.colors['$color-secondary-100']};
-
-    &:hover {
-      background-color: ${({ theme }) => theme.colors['$color-secondary-110']};
-    }
   }
 `
 

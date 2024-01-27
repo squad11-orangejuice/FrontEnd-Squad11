@@ -1,7 +1,14 @@
 import { useState } from 'react'
+
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+import { Button } from '@/components/Button'
+
+import { useTheme } from 'styled-components'
+
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
+
 import TextField from '@mui/material/TextField'
 import LogoSignUp from '@/assets/logo_register.svg'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -15,7 +22,6 @@ import {
   Image,
   Title,
   AreaForm,
-  SubmitButton,
   LinkText,
   AreaRegister,
   AlertModal,
@@ -36,6 +42,8 @@ export function SignUp() {
   const [sucessRegister, setSucessRegister] = useState<boolean>(false)
   const [messageError, setMessageError] = useState<string>('')
 
+  const theme = useTheme()
+
   const {
     handleSubmit,
     register,
@@ -47,9 +55,11 @@ export function SignUp() {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data)
     setLoading(true)
-    setSucessRegister(true)
-    setMessageError('')
-    setLoading(false)
+    setTimeout(() => {
+      setSucessRegister(true)
+      setMessageError('')
+      setLoading(false)
+    }, 2000)
   }
 
   const handleError: SubmitErrorHandler<FormInputs> = (errors) => {
@@ -130,16 +140,22 @@ export function SignUp() {
               ),
             }}
           />
-          <SubmitButton
+          <Button
+            title="CADASTRAR"
             type="submit"
             variant="contained"
-            loading={loading}
             color="primary"
             size="large"
-            sx={{ width: '100%' }}
-          >
-            CADASTRAR
-          </SubmitButton>
+            sx={{
+              width: '100%',
+              gridColumn: 'span 2',
+              backgroundColor: theme.colors['$color-secondary-100'],
+              '&:hover': {
+                backgroundColor: theme.colors['$color-secondary-110'],
+              },
+            }}
+            loading={loading}
+          />
           <LinkText to={'/'}>Logar</LinkText>
         </AreaForm>
       </AreaRegister>
