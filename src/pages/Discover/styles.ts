@@ -1,41 +1,60 @@
 import styled from 'styled-components'
 
-export const ProjectsContainer = styled.div`
+export const MainContent = styled.main`
+  height: 100vh;
+  width: 100vw;
+`
+
+export const MyDiscoverContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  gap: 1rem;
+  padding: 7rem 2rem 77px;
+  width: 100%;
+  @media only screen and (max-width: 667px) {
+    padding: 4rem 1.5rem 2.25rem;
+  }
+`
 
-  @media only screen and (min-width: 601px) {
-    max-width: 50%;
+export const ProjectsContainer = styled.div`
+  margin: 5rem 0 2.5rem;
+  width: 723px;
+
+  @media screen and (max-width: 667px) {
+    margin: 2.5rem 0 2rem;
+  }
+  @media screen and (max-width: 790px) {
+    width: 100%;
   }
 `
 
 export const CardDisplay = styled.div`
-  flex-wrap: wrap;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: auto;
 
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
+  @media (max-width: 872px) {
+    width: 312px;
   }
 `
+
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center; 
-  margin-top: 5rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  text-align: center;
 
   height: 33%;
 
-  p {
-    color: ${(props) => props.theme.colors['$color-neutral-130']};
+  h4 {
+    color: ${(props) => props.theme.colors['$color-principal-90']};
     font-size: ${(props) => props.theme.textSizes.h4};
-    font-weight:  ${(props) => props.theme.fontWeight.bold};
+    font-weight: ${(props) => props.theme.fontWeight.regular};
+    letter-spacing: 0.25px;
+    max-width: 744px;
+    @media only screen and (max-width: 667px) {
+      font-size: ${(props) => props.theme.textSizes.h5};
+      letter-spacing: 0;
+    }
   }
 `
