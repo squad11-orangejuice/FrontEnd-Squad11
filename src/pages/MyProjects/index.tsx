@@ -17,6 +17,7 @@ import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
+import ModalSucess from '@/components/ModalSucess'
 
 const mockInfo = [
   // Info Para Testar Cards
@@ -130,6 +131,8 @@ export function MyProjects() {
       <CardDisplay>{cardContent}</CardDisplay>
       {editModalOpen && <ProjectFormModal titleModal="Editar projeto " />}
       {deleteModalOpen && <DeleteProjectModal />}
+
+      <ModalSucess />
     </>
   )
 }
