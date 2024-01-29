@@ -15,6 +15,7 @@ export const ButtonIconEdit = styled.div`
   top: 16px;
   right: 16px;
   z-index: 1;
+  cursor: pointer;
   &:hover {
     animation: ${fadeIn} 0.3s ease;
   }
