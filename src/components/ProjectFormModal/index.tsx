@@ -2,22 +2,20 @@
 import React, { useEffect, useState } from 'react'
 import * as z from 'zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
+
 import TextField from '@mui/material/TextField'
 
 import {
   AreaButton,
+  AreaCard,
   AreaForm,
   AreaImage,
   AreaInput,
   AreaModal,
   ButtonCancel,
-  ImageInput,
-  InputImage,
   ProjectFormModalContainer,
   SubTitle,
   SubmitButton,
-  TextImageInput,
   Title,
 } from './styles'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -25,6 +23,8 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { tags } from '@/utils/tags'
 import FormHelperText from '@mui/material/FormHelperText'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
+import { CardAddProject } from '../CardAddProject'
+import Typography from '@mui/material/Typography'
 
 type Props = {
   titleModal: string
@@ -48,7 +48,7 @@ export function ProjectFormModal({ titleModal }: Props) {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const modalContext = useOpenCloseModal()
-  const { closeEditModal, projectData } = modalContext
+  const { closeEditModal, projectData, closeAddProjectModal } = modalContext
 
   const {
     register,
@@ -88,6 +88,11 @@ export function ProjectFormModal({ titleModal }: Props) {
     setSelectedTags(value)
   }
 
+  function handleClickClosedAllModal() {
+    closeEditModal()
+    closeAddProjectModal()
+  }
+
   useEffect(() => {
     if (projectData && projectData.url) {
       console.log(projectData.url)
@@ -111,32 +116,24 @@ export function ProjectFormModal({ titleModal }: Props) {
             <SubTitle>
               Selecione o conteúdo que você deseja fazer upload
             </SubTitle>
-
-            <InputImage
-              onClick={handleDivClick}
-              style={{ padding: previewImage ? '0' : '0 8px' }}
-            >
-              <input
-                id="fileInput"
-                type="file"
-                accept="image/*"
-                {...register('imagem', { required: true })}
-                onChange={handleInputChange}
-                style={{ display: 'none' }}
+            <AreaCard>
+              <CardAddProject
+                register={register}
+                handleDivClick={handleDivClick}
+                handleInputChange={handleInputChange}
+                previewImage={previewImage}
               />
-              {!previewImage && (
-                <>
-                  <PhotoLibraryIcon sx={{ fontSize: 46 }} />
-                  <TextImageInput>
-                    Compartilhe seu talento com milhares de pessoas
-                  </TextImageInput>
-                </>
-              )}
+            </AreaCard>
+            {errors.imagem && (
+              <Typography
+                sx={{ marginLeft: '1rem', marginTop: '-13px' }}
+                variant="body2"
+                color="error"
+              >
+                Não foi possível adicionar esta imagem.
+              </Typography>
+            )}
 
-              {previewImage && (
-                <ImageInput src={previewImage} alt="Prévia da imagem" />
-              )}
-            </InputImage>
             <SubTitle>Visualizar publicação</SubTitle>
             <AreaButton>
               <SubmitButton
@@ -153,7 +150,7 @@ export function ProjectFormModal({ titleModal }: Props) {
                 variant="contained"
                 color="primary"
                 size="large"
-                onClick={() => closeEditModal()}
+                onClick={handleClickClosedAllModal}
               >
                 CANCELAR
               </ButtonCancel>
