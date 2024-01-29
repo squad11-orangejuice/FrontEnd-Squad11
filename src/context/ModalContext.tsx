@@ -15,11 +15,14 @@ interface ModalContextType {
   deleteModalOpen: boolean
   openDeleteModal: (projectData: ProjectData) => void
   closeDeleteModal: () => void
+  addProjectModalOpen: boolean
+  openAddProjectModal: () => void
+  closeAddProjectModal: () => void
   editModalOpen: boolean
   openEditModal: (projectData: ProjectData) => void
   closeEditModal: () => void
   viewPostModalOpen: boolean
-  openViewPostModal: () => void
+  openViewPostModal: (projectData: ProjectData) => void
   closeViewPostModal: () => void
   requestSucessModalOpen: boolean
   OpenRequestSucessModal: () => void
@@ -35,6 +38,8 @@ export const ModalContext = createContext({} as ModalContextType)
 export function ModalContextProvider({ children }: ModalContextProviderProps) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
+  const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
+
   const [viewPostModalOpen, setViewPostModalOpen] = useState(false)
   const [requestSucessModalOpen, setRequestSucessModalOpen] = useState(false)
   const [projectData, setProjectData] = useState<ProjectData | null>(null)
@@ -48,6 +53,9 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
     setProjectData(null)
   }
 
+  const openAddProjectModal = () => setAddProjectModalOpen(true)
+  const closeAddProjectModal = () => setAddProjectModalOpen(false)
+
   const openEditModal = (projectData: ProjectData) => {
     setEditModalOpen(true)
     setProjectData(projectData)
@@ -57,7 +65,10 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
     setProjectData(null)
   }
 
-  const openViewPostModal = () => setViewPostModalOpen(true)
+  const openViewPostModal = (projectData: ProjectData) => {
+    setViewPostModalOpen(true)
+    setProjectData(projectData)
+  }
   const closeViewPostModal = () => setViewPostModalOpen(false)
 
   const OpenRequestSucessModal = () => setRequestSucessModalOpen(true)
@@ -70,6 +81,9 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
         deleteModalOpen,
         openDeleteModal,
         closeDeleteModal,
+        addProjectModalOpen,
+        openAddProjectModal,
+        closeAddProjectModal,
         editModalOpen,
         openEditModal,
         closeEditModal,
