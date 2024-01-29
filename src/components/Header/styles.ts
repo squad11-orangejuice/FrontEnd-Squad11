@@ -9,10 +9,11 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   padding: 0.75rem 1.5rem;
   width: 100%;
+  border-radius: 4px;
 
   @media only screen and (min-width: 667px) {
-    border-radius: 4px;
     padding: 1rem 2rem;
+    border-radius: 0;
 
     button {
       display: none;
@@ -34,7 +35,6 @@ export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   cursor: pointer;
   margin-right: 1.5rem;
-  // mobile //
   @media only screen and (max-width: 667px) {
     display: none;
   }
@@ -52,7 +52,7 @@ export const TabsContainer = styled.div`
   justify-content: center;
   white-space: nowrap;
   @media only screen and (max-width: 667px) {
-    margin-left: -15px;
+    margin-left: 9px;
   }
 `
 export const Logo = styled.img`
