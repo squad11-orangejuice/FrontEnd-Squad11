@@ -17,7 +17,6 @@ import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
-import ModalSucess from '@/components/ModalSucess'
 import { mockInfo, blankProjectMock } from '@/utils/constants'
 
 
@@ -96,7 +95,6 @@ export function MyProjects() {
       {editModalOpen && <ProjectFormModal titleModal="Editar projeto " />}
       {deleteModalOpen && <DeleteProjectModal />}
 
-      <ModalSucess openState={true} />
     </>
   )
 }
