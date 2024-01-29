@@ -1,3 +1,8 @@
+import ImageUser1 from '@/assets/ImageUser.png'
+import ImageUser2 from '@/assets/avatar1.svg'
+import ImageUser3 from '@/assets/avatar2.svg'
+import ImageUser4 from '@/assets/avatar3.svg'
+
 export interface MockInfoType {
   id: string
   title: string
@@ -6,6 +11,7 @@ export interface MockInfoType {
   url: string
   description: string
   userName: string
+  userImage: string
 }
 
 export const blankProjectMock = {
@@ -18,7 +24,6 @@ export const blankProjectMock = {
   description: '',
 }
 
-
 export const mockInfo: Array<MockInfoType> = [
   // Info Para Testar Cards
   {
@@ -30,6 +35,7 @@ export const mockInfo: Array<MockInfoType> = [
     tags: ['UX', 'Web'],
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
+    userImage: ImageUser1,
   },
   {
     id: '1',
@@ -40,16 +46,18 @@ export const mockInfo: Array<MockInfoType> = [
     tags: ['UX', 'UI'],
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
+    userImage: ImageUser2,
   },
   {
     id: '1',
     title: 'Aqui um titulo qualquer 3',
     linkProject: 'https://www.google.com/',
     url: 'https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    userName: 'Douglas',
+    userName: 'Douglas shaud',
     tags: ['UI', 'Web'],
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
+    userImage: ImageUser3,
   },
 
   {
@@ -61,6 +69,7 @@ export const mockInfo: Array<MockInfoType> = [
     tags: ['UI', 'Web'],
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
+    userImage: ImageUser4,
   },
 
   {
@@ -72,17 +81,17 @@ export const mockInfo: Array<MockInfoType> = [
     tags: ['UI', 'Web'],
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
+    userImage: ImageUser1,
   },
   {
     id: '2',
     title: 'Aqui um titulo qualquer 6',
     linkProject: 'https://www.google.com/',
     url: 'https://as1.ftcdn.net/v2/jpg/05/75/80/34/1000_F_575803464_pqACzSefEtLVNUEsgjkdj77OYopRNmuZ.jpg',
-    userName: 'Douglas',
+    userName: 'Douglas santos',
     tags: ['UI', 'Web'],
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
+    userImage: ImageUser4,
   },
-
-
 ]
