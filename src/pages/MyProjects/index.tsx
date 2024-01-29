@@ -1,35 +1,44 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import { Header } from '@/components/Header'
-import ImageUser from '@/assets/ImageUser.png'
+import UserImage from '@/assets/ImageUser.png'
 import {
-  BotaoAdicionarProjeto,
+  ContainerMyProject,
   CardDisplay,
   ContainerUser,
   MyProjectsContainer,
   UserInfo,
   UserLocal,
-  UserNome,
+  UserName,
   UserPerfil,
+  Label,
+  MainContent,
+  DivSkeleton,
 } from './styles'
 import TextField from '@mui/material/TextField'
+import Skeleton from '@mui/material/Skeleton'
+
 import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
-import { mockInfo, blankProjectMock } from '@/utils/constants'
-
+import { mockInfo } from '@/utils/constants'
+import { Button } from '@/components/Button'
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
-  const [userId, setUserId] = useState('1');
+  const [userId, setUserId] = useState('1')
   const [searchTerm, setSearchTerm] = useState('')
 
   const modalContext = useOpenCloseModal()
 
-  const { editModalOpen, deleteModalOpen } = modalContext
-
-  const shouldDisableButton = items.length === 0
+  const {
+    editModalOpen,
+    deleteModalOpen,
+    addProjectModalOpen,
+    openAddProjectModal,
+  } = modalContext
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value)
@@ -41,59 +50,63 @@ export function MyProjects() {
     ),
   )
 
-  const handleOnClick = () => {
-    console.log('Hello')
-  }
-
   const cardContent =
     filteredItems.length >= 1 ? (
-      filteredItems.map((item) => {
+      filteredItems.map((item, index) => {
         if (userId === item.id) {
-          return (
-            <CardProject
-              projectData={item}
-              onClick={() => { }}
-            />
-          )
+          return <CardProject key={index} projectData={item} />
         }
       })
     ) : (
-      <CardProject projectData={blankProjectMock} onClick={() => { }} />
+      <>
+        <CardProject />
+        <Skeleton variant="rectangular">
+          <DivSkeleton />
+        </Skeleton>
+        <Skeleton variant="rectangular">
+          <DivSkeleton />
+        </Skeleton>
+      </>
     )
 
   return (
-    <>
+    <MainContent>
       <Header />
-      <ContainerUser>
-        <UserPerfil>
-          <img src={ImageUser} alt="Foto-perfil-usuário" />
-        </UserPerfil>
-        <UserInfo>
-          <UserNome> Camila Soares</UserNome>
-          <UserLocal> Brasil </UserLocal>
-          <BotaoAdicionarProjeto
-            onClick={handleOnClick}
-            disabled={shouldDisableButton}
-          >
-            <strong> Adicionar Projeto </strong>{' '}
-          </BotaoAdicionarProjeto>
-        </UserInfo>
-      </ContainerUser>
+      <ContainerMyProject>
+        <ContainerUser>
+          <UserPerfil src={UserImage} alt="Foto-perfil-usuário" />
+          <UserInfo>
+            <UserName> Camila Soares</UserName>
+            <UserLocal> Brasil </UserLocal>
+            <Button
+              title="ADICIONAR PROJETO"
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={openAddProjectModal}
+            />
+          </UserInfo>
+        </ContainerUser>
 
-      <MyProjectsContainer>
-        Meus projetos
-        <TextField
-          sx={{ width: '100%' }}
-          id="outlined-helperText"
-          label="Buscar tags"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-      </MyProjectsContainer>
+        <MyProjectsContainer>
+          <Label>Meus projeImageUsertos</Label>
+          <TextField
+            sx={{ width: '100%' }}
+            id="outlined-helperText"
+            label="Buscar tags"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </MyProjectsContainer>
+        <CardDisplay>{cardContent}</CardDisplay>
 
-      <CardDisplay>{cardContent}</CardDisplay>
-      {editModalOpen && <ProjectFormModal titleModal="Editar projeto " />}
-      {deleteModalOpen && <DeleteProjectModal />}
-    </>
+        {addProjectModalOpen && (
+          <ProjectFormModal titleModal="Adicionar projeto" />
+        )}
+        {editModalOpen && <ProjectFormModal titleModal="Editar projeto" />}
+        {deleteModalOpen && <DeleteProjectModal />}
+      </ContainerMyProject>
+    </MainContent>
   )
 }
