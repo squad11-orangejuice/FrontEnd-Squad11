@@ -3,29 +3,24 @@ import { Header } from '@/components/Header'
 import TextField from '@mui/material/TextField'
 import { ProjectsContainer, CardDisplay, TitleContainer } from './styles'
 import { CardProject } from '@/components/CardProject'
-
-const mockInfo = [
-  // Info Para Testar Cards
-  {
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    name: 'Alanna Silva',
-    tags: ['UX', 'WEB'],
-  },
-  {
-    url: 'https://images2.alphacoders.com/151/15102.jpg',
-    name: 'Carolina',
-    tags: ['UX', 'UI'],
-  },
-  {
-    url: 'https://images4.alphacoders.com/134/1341419.png',
-    name: 'Douglas',
-    tags: ['UI', 'WEB'],
-  },
-]
+import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
+import { ViewProjectModal } from '@/components/ViewProjectModal'
+import { mockInfo, MockInfoType } from '@/utils/constants'
 
 export function Discover() {
   const [searchTerm, setSearchTerm] = useState('')
   const [items, setItems] = useState(mockInfo)
+  const [modalData, setModalData] = useState(mockInfo[0]);
+
+  const modalContext = useOpenCloseModal()
+
+  const { viewPostModalOpen, openViewPostModal } = modalContext
+
+  const handleOnClickCard = (data: MockInfoType) => {
+    setModalData(data);
+    openViewPostModal();
+  }
+
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value)
@@ -42,11 +37,8 @@ export function Discover() {
       ? filteredItems.map((item) => {
         return (
           <CardProject
-            url={item.url}
-            key={item.name}
-            creatorId={3}
-            tags={item.tags}
-            name={item.name}
+            projectData={item}
+            onClick={() => handleOnClickCard(item)}
           />
         )
       })
@@ -69,6 +61,8 @@ export function Discover() {
       </ProjectsContainer>
 
       <CardDisplay>{cardContent}</CardDisplay>
+      {viewPostModalOpen && <ViewProjectModal modalData={modalData} isOpen={false} />}
+
     </>
   )
 }

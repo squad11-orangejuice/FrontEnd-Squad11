@@ -18,43 +18,12 @@ import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
 import ModalSucess from '@/components/ModalSucess'
+import { mockInfo, blankProjectMock } from '@/utils/constants'
 
-const mockInfo = [
-  // Info Para Testar Cards
-  {
-    id: 'a',
-    titulo: 'Aqui um titulo qualquer',
-    linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Alanna Silva',
-    tags: ['UX', 'Web'],
-    descricao:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
-  },
-  {
-    id: 'b',
-    titulo: 'Aqui um titulo qualquer1',
-    linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Carolina',
-    tags: ['UX', 'UI'],
-    descricao:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
-  },
-  {
-    id: 'c',
-    titulo: 'Aqui um titulo qualquer2',
-    linkProject: 'https://www.google.com/',
-    url: 'https://static7.depositphotos.com/1000572/681/i/950/depositphotos_6815375-stock-photo-horizontal-landscape-with-mountains.jpg',
-    nome: 'Douglas',
-    tags: ['UI', 'Web'],
-    descricao:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi natus laborum nemo ut cupiditate. Eaque sit neque, nihil odio illo mollitia iste esse obcaecati accusantium at? Reprehenderit non officia similique.',
-  },
-]
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
+  const [userId, setUserId] = useState('1');
   const [searchTerm, setSearchTerm] = useState('')
 
   const modalContext = useOpenCloseModal()
@@ -80,22 +49,17 @@ export function MyProjects() {
   const cardContent =
     filteredItems.length >= 1 ? (
       filteredItems.map((item) => {
-        return (
-          <CardProject
-            id={item.id}
-            url={item.url}
-            linkProject={item.linkProject}
-            key={item.id}
-            creatorId={1}
-            tags={item.tags}
-            name={item.nome}
-            title={item.titulo}
-            description={item.descricao}
-          />
-        )
+        if (userId === item.id) {
+          return (
+            <CardProject
+              projectData={item}
+              onClick={() => { }}
+            />
+          )
+        }
       })
     ) : (
-      <CardProject tags={[]} />
+      <CardProject projectData={blankProjectMock} onClick={() => { }} />
     )
 
   return (
@@ -132,7 +96,7 @@ export function MyProjects() {
       {editModalOpen && <ProjectFormModal titleModal="Editar projeto " />}
       {deleteModalOpen && <DeleteProjectModal />}
 
-      <ModalSucess />
+      <ModalSucess openState={true} />
     </>
   )
 }

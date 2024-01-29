@@ -10,7 +10,6 @@ export function Router() {
     <Routes>
       <Route path="/" element={<SignIn />} />
       <Route path="/registro" element={<SignUp />} />
-
       <Route path="/projetos" element={<MyProjects />} />
       <Route path="/descobrir" element={<Discover />} />
       <Route path="*" element={<Navigate replace to="/" />} />

@@ -1,9 +1,9 @@
 import * as React from 'react'
-import Button from '@mui/material/Button'
 
 import Menu from '@mui/material/Menu'
 import ModeIcon from '@mui/icons-material/Mode'
-import { StyledMenuItem } from './styles'
+
+import { ArrowIconEdit, ButtonIconEdit, StyledMenuItem } from './styles'
 
 type Props = {
   openModalEdit: () => void
@@ -14,7 +14,7 @@ export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
@@ -32,24 +32,22 @@ export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
   }
 
   return (
-    <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        style={{ position: 'absolute', top: 0, right: 0, zIndex: 1 }}
-      >
+    <>
+      <ButtonIconEdit onClick={handleClick}>
         <ModeIcon
           style={{
             color: '#303133',
             background: '#FFCC99',
             borderRadius: '50%',
-            fontSize: 20,
+            fontSize: 28,
+            padding: '2px',
+            position: 'relative',
           }}
         />
-      </Button>
+      </ButtonIconEdit>
+
+      {anchorEl && <ArrowIconEdit />}
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -58,14 +56,45 @@ export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        sx={{
+          '& .MuiMenu-paper': {
+            padding: '1rem 0',
+            borderRadius: '8px',
+            background: '#FCFDFF',
+            color: '#515255',
+            letterSpacing: '0.15px',
+          },
+        }}
       >
-        <StyledMenuItem onClick={handleClickOpenEditModal}>
+        <StyledMenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClickOpenEditModal}
+        >
           Editar
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleClickOpenDeleteModal}>
+        <StyledMenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClickOpenDeleteModal}
+        >
           Excluir
         </StyledMenuItem>
       </Menu>
-    </div>
+    </>
   )
 }
