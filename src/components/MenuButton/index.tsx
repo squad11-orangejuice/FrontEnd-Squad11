@@ -31,7 +31,12 @@ const MenuButton = () => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        sx={{ color: 'white', margin: 0, padding: 0 }}
+        sx={{
+          color: 'white',
+          minHeight: 0,
+          minWidth: 0,
+          padding: 0,
+        }}
       >
         <MenuIcon sx={{ fontSize: '24px', color: '#ffffff' }} />
       </Button>
@@ -50,7 +55,9 @@ const MenuButton = () => {
         <MenuItem onClick={() => handleClickRedirectToNextPage('descobrir')}>
           Descobrir
         </MenuItem>
-        <MenuItem onClick={handleClose}>Configurações</MenuItem>
+        <MenuItem sx={{ borderTop: '1px solid #E0E0E0' }} onClick={handleClose}>
+          Configurações
+        </MenuItem>
       </Menu>
     </>
   )
