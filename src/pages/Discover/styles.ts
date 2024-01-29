@@ -34,8 +34,9 @@ export const TitleContainer = styled.div`
   height: 33%;
 
   p {
+    text-align: center;
     color: ${(props) => props.theme.colors['$color-neutral-130']};
     font-size: ${(props) => props.theme.textSizes.h4};
-    font-weight:  ${(props) => props.theme.fontWeight.bold};
+    font-weight:  ${(props) => props.theme.fontWeight.regular};
   }
 `

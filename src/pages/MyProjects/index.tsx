@@ -94,6 +94,7 @@ export function MyProjects() {
       <CardDisplay>{cardContent}</CardDisplay>
       {editModalOpen && <ProjectFormModal titleModal="Editar projeto " />}
       {deleteModalOpen && <DeleteProjectModal />}
+
     </>
   )
 }
