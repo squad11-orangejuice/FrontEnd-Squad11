@@ -1,98 +1,117 @@
 import styled from 'styled-components'
 
+export const MainContent = styled.main`
+  height: 100vh;
+  width: 100vw;
+`
+
+export const ContainerMyProject = styled.div`
+  padding: 0 2rem 39px;
+  width: 100%;
+  @media only screen and (max-width: 667px) {
+    padding: 0 1.5rem 2.25rem;
+  }
+`
+
 export const ContainerUser = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
+  gap: 2.625rem;
   justify-content: center;
-  align-items: center;
-  margin-top: 3.125rem;
+  padding: 7rem 2rem 3.5rem;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 500px) {
     flex-direction: column;
+    gap: 1rem;
+    padding: 3.5rem 2rem 2.5rem;
   }
-`;
+`
 
-export const UserPerfil = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 7.7rem;
-    height: 7.7rem;
-    border-radius: 300px;
-    margin-right: 2.62rem;
-  }
-`;
+export const UserPerfil = styled.img`
+  width: 7.625rem;
+  height: 7.625rem;
+  border-radius: 50%;
+`
 
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.5rem;
-  gap: 0.5rem;
-`;
+  width: 200px;
+`
 
-export const UserNome = styled.h2`
-  font-weight:  ${(props) => props.theme.fontWeight.regular};
+export const UserName = styled.h2`
+  font-weight: ${(props) => props.theme.fontWeight.regular};
 
   font-size: ${(props) => props.theme.textSizes.h5};
   color: ${(props) => props.theme.colors['$color-neutral-120']};
-`;
+`
 
 export const UserLocal = styled.p`
-  margin: 0.03rem 0;
-  font-weight:  ${(props) => props.theme.fontWeight.regular};
+  font-weight: ${(props) => props.theme.fontWeight.regular};
   font-size: ${(props) => props.theme.textSizes.subtitle1};
   color: ${(props) => props.theme.colors['$color-neutral-90']};
-`;
-
-export const BotaoAdicionarProjeto = styled.button`
-  padding: 0.5rem, 1.375rem, 0.5rem, 1.375rem;
-  width: 13rem;
-  height: 2.262rem;
-  border-radius: 4px;
-  font-weight:  ${(props) => props.theme.fontWeight.medium};
-  font-size: ${(props) => props.theme.textSizes.button};
-  border: none;
-  color: white;
-  background: ${(props) => props.theme.colors['$color-secondary-100']};
-  text-transform: uppercase;
-  margin-top: 0.5rem;
-
-  &:hover {
-    background: ${(props) => props.theme.colors['$color-secondary-110']};
-    transition: 0.2s;
+  letter-spacing: 0.15px;
+  margin: 1rem 0 1.5rem;
+  opacity: 0.5;
+  @media only screen and (max-width: 500px) {
+    margin: 0.5rem 0;
   }
-
-  &:disabled {
-    color: rgba(0, 0, 0, 0.38);
-    cursor: default;
-    background: #d3d3d3;
-  }
-`;
+`
 
 export const MyProjectsContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-top: 5rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  gap: 1rem;
   color: ${(props) => props.theme.colors['$color-neutral-130']};
-  font-weight:  ${(props) => props.theme.fontWeight.medium};
+  flex-direction: column;
+  font-weight: ${(props) => props.theme.fontWeight.medium};
   font-size: ${(props) => props.theme.textSizes.h6};
+  gap: 1rem;
+  width: 513px;
 
-  @media only screen and (min-width: 601px) {
-    max-width: 50%;
+  @media only screen and (max-width: 560px) {
+    width: 100%;
   }
-`;
+`
+export const Label = styled.label`
+  color: ${({ theme }) => theme.colors['$color-neutral-120']};
+  font-family: ${({ theme }) => theme.fontWeight.medium};
+  font-size: ${({ theme }) => theme.textSizes.h6};
+  letter-spacing: 0.15px;
+  opacity: 0.6;
+`
 
 export const CardDisplay = styled.div`
-  flex-wrap: wrap;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  width: auto;
 
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
+  @media (max-width: 872px) {
+    width: 312px;
   }
-`;
+
+  @media only screen and (max-width: 667px) {
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 872px) {
+    span {
+      &:nth-child(2),
+      &:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+  @media (min-width: 873px) and (max-width: 1282px) {
+    span {
+      &:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+`
+export const DivSkeleton = styled.div`
+  width: 390px;
+  height: 258px;
+`
