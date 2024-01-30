@@ -7,6 +7,8 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   outline: none;
   font-family: 'Roboto';
+  overflow-x: hidden;
+
 }
 body {
   background: ${(props) => props.theme.colors['$color-neutral-60']};

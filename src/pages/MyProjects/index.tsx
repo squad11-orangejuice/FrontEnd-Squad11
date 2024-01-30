@@ -90,7 +90,7 @@ export function MyProjects() {
         </ContainerUser>
 
         <MyProjectsContainer>
-          <Label>Meus projeImageUsertos</Label>
+          <Label>Meus projetos</Label>
           <TextField
             sx={{ width: '100%' }}
             id="outlined-helperText"
@@ -108,6 +108,5 @@ export function MyProjects() {
         {deleteModalOpen && <DeleteProjectModal />}
       </ContainerMyProject>
     </MainContent>
-
   )
 }

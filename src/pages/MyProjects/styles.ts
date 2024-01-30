@@ -8,6 +8,7 @@ export const MainContent = styled.main`
 export const ContainerMyProject = styled.div`
   padding: 0 2rem 39px;
   width: 100%;
+
   @media only screen and (max-width: 667px) {
     padding: 0 1.5rem 2.25rem;
   }
@@ -74,7 +75,7 @@ export const MyProjectsContainer = styled.div`
 `
 export const Label = styled.label`
   color: ${({ theme }) => theme.colors['$color-neutral-120']};
-  font-family: ${({ theme }) => theme.fontWeight.medium};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
   font-size: ${({ theme }) => theme.textSizes.h6};
   letter-spacing: 0.15px;
   opacity: 0.6;
@@ -85,9 +86,9 @@ export const CardDisplay = styled.div`
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-top: 2.5rem;
-  width: auto;
+  max-width: 100%;
 
-  @media (max-width: 872px) {
+  @media (max-width: 389px) {
     width: 312px;
   }
 
