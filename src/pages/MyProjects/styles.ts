@@ -8,6 +8,7 @@ export const MainContent = styled.main`
 export const ContainerMyProject = styled.div`
   padding: 0 2rem 39px;
   width: 100%;
+
   @media only screen and (max-width: 667px) {
     padding: 0 1.5rem 2.25rem;
   }
@@ -85,9 +86,9 @@ export const CardDisplay = styled.div`
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-top: 2.5rem;
-  width: auto;
+  max-width: 100%;
 
-  @media (max-width: 872px) {
+  @media (max-width: 389px) {
     width: 312px;
   }
 
