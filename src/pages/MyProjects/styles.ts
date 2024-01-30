@@ -74,7 +74,7 @@ export const MyProjectsContainer = styled.div`
 `
 export const Label = styled.label`
   color: ${({ theme }) => theme.colors['$color-neutral-120']};
-  font-family: ${({ theme }) => theme.fontWeight.medium};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
   font-size: ${({ theme }) => theme.textSizes.h6};
   letter-spacing: 0.15px;
   opacity: 0.6;
