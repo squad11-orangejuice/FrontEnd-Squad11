@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   outline: none;
   font-family: 'Roboto';
-  overflow-x: hidden;
 
 }
 body {

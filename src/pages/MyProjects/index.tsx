@@ -14,10 +14,8 @@ import {
   UserPerfil,
   Label,
   MainContent,
-  DivSkeleton,
 } from './styles'
 import TextField from '@mui/material/TextField'
-import Skeleton from '@mui/material/Skeleton'
 
 import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
@@ -25,6 +23,7 @@ import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
 import { mockInfo } from '@/utils/constants'
 import { Button } from '@/components/Button'
+import { SkeletonLoading } from '@/components/SkeletonLoading'
 
 export function MyProjects() {
   const [items, setItems] = useState(mockInfo)
@@ -60,12 +59,7 @@ export function MyProjects() {
     ) : (
       <>
         <CardProject />
-        <Skeleton variant="rectangular">
-          <DivSkeleton />
-        </Skeleton>
-        <Skeleton variant="rectangular">
-          <DivSkeleton />
-        </Skeleton>
+        <SkeletonLoading quantity={2} />
       </>
     )
 
