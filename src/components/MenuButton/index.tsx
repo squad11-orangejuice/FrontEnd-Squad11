@@ -1,32 +1,65 @@
-import { useState, useRef } from 'react'
-import { MobileButton, MobileMenu, MenuItem } from './styles'
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import MenuIcon from '@mui/icons-material/Menu'
 
 const MenuButton = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen)
+  const navigate = useNavigate()
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClickRedirectToNextPage = (page: string) => {
+    setAnchorEl(null)
+    navigate(`/${page}`)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
   }
 
-  const buttonRef = useRef<HTMLButtonElement | null>(null)
-
   return (
-    <div>
-      <MobileButton onClick={toggleMenu}>
-        <MenuOutlinedIcon style={{ color: 'white', background: '#111133' }} />
-      </MobileButton>
-      <MobileMenu
-        isOpen={menuOpen}
-        buttonRect={buttonRef.current?.getBoundingClientRect()}
+    <>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        sx={{
+          color: 'white',
+          minHeight: 0,
+          minWidth: 0,
+          padding: 0,
+        }}
       >
-        <div>
-          <MenuItem to="/projetos">Meus Projetos</MenuItem>
-          <MenuItem to="/descobrir">Descobrir</MenuItem>
-          <MenuItem to="/configuracoes">Configurações</MenuItem>
-        </div>
-      </MobileMenu>
-    </div>
+        <MenuIcon sx={{ fontSize: '24px', color: '#ffffff' }} />
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={() => handleClickRedirectToNextPage('projetos')}>
+          Meus Projetos
+        </MenuItem>
+        <MenuItem onClick={() => handleClickRedirectToNextPage('descobrir')}>
+          Descobrir
+        </MenuItem>
+        <MenuItem sx={{ borderTop: '1px solid #E0E0E0' }} onClick={handleClose}>
+          Configurações
+        </MenuItem>
+      </Menu>
+    </>
   )
 }
 

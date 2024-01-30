@@ -18,10 +18,11 @@ import {
   Title,
   Image,
   SubTitle,
-  SubmitButton,
   LinkText,
   AreaLogin,
 } from './styles'
+import { useTheme } from 'styled-components'
+import { Button } from '@/components/Button'
 
 const validationSchema = z.object({
   email: z.string().email('Digite um e-mail válido'),
@@ -34,6 +35,8 @@ export function SignIn() {
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
+  const theme = useTheme()
+
   const {
     handleSubmit,
     register,
@@ -45,6 +48,9 @@ export function SignIn() {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data)
     setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
   }
 
   const handleError: SubmitErrorHandler<FormInputs> = (errors) => {
@@ -91,16 +97,21 @@ export function SignIn() {
               ),
             }}
           />
-          <SubmitButton
+          <Button
+            title="ENTRAR"
             type="submit"
             variant="contained"
             loading={loading}
             color="primary"
             size="large"
-            sx={{ width: '100%' }}
-          >
-            ENTRAR
-          </SubmitButton>
+            sx={{
+              width: '100%',
+              backgroundColor: theme.colors['$color-secondary-100'],
+              '&:hover': {
+                backgroundColor: theme.colors['$color-secondary-110'],
+              },
+            }}
+          />
           <LinkText to={'/registro'}>Cadastre-se</LinkText>
         </AreaForm>
       </AreaLogin>

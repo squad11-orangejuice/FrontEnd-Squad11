@@ -18,9 +18,10 @@ export function DeleteProjectModal() {
 
   async function handleDeleteProject() {
     setLoading(true)
-    setLoading(false)
-
-    OpenRequestSucessModal()
+    setTimeout(() => {
+      setLoading(false)
+      OpenRequestSucessModal()
+    }, 2000)
   }
 
   return (

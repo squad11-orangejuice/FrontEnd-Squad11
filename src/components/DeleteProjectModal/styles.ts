@@ -29,13 +29,13 @@ export const AreaModal = styled.div`
 `
 export const Title = styled.h5`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-family: ${({ theme }) => theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.h5};
   line-height: 1.5rem;
 `
 export const SubTitle = styled.label`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
-  font-family: ${({ theme }) => theme.fonts.regular};
+  font-family: ${({ theme }) => theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.textSizes.body1};
   line-height: 1rem;
   letter-spacing: 0.5px;

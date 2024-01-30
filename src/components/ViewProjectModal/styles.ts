@@ -1,98 +1,29 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const MainContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-margin: 3rem;
-
-@media only screen and (max-width: 600px) {
-    margin: 2rem;
-  }
-`;
-
-
-export const HeaderContainerModal = styled.header`
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`
-export const HeaderContainerBottom = styled.div`
-
-display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 1rem;
-
-  @media only screen and (min-width: 601px) {
-    display: none;
-  }
-
-
-`;
-
-export const ContentUser = styled.div`
-  align-items: center;
   flex-direction: column;
-  font-size: ${(props) => props.theme.textSizes.subtitle1};
-  color: ${(props) => props.theme.colors['$color-neutral-120']};
-  font-weight: 400;
-
-  p{
-    color: ${(props) => props.theme.colors['$color-neutral-110']};
-  }
-  
-`;
-
-export const TitlePost = styled.div`
-  color: ${(props) => props.theme.colors['$color-neutral-120']};
-  font-size: ${(props) => props.theme.textSizes.h5};;
-`;
-
-export const TitlePostBottom = styled.div`
-  color: ${(props) => props.theme.colors['$color-neutral-120']};
-  font-size: ${(props) => props.theme.textSizes.h5};;
-  margin-bottom: 1rem;
-
-  @media only screen and (min-width: 601px) {
-    display: none;
-  }
-`;
-
-
-
-export const Tags = styled.div`
-  border-radius:50%;
-  padding: 5px;
-  margin-left: 5px;
-  background: ${(props) => props.theme.colors['$color-neutral-70']};
-  font-size: 12px;
-`;
-
-export const LeftContainer = styled.div`
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  img {
-    margin-right: 0.5rem;
+  margin: 2.5rem 6.375rem 6.188rem;
 
-    @media only screen and (max-width: 600px) {
-    height: 30px;
+  @media only screen and (max-width: 1024px) {
+    margin: 2.13rem 1.5rem;
   }
-  }
-
 `
-export const TagsProject = styled.div`
-  display: flex;
-`;
+
+export const TitleProject = styled.h5`
+  color: ${({ theme }) => theme.colors['$color-neutral-120']};
+  font-size: ${({ theme }) => theme.textSizes.h5};
+  font-weight: ${({ theme }) => theme.fontWeight.regular};
+  margin-bottom: 2rem;
+
+  @media only screen and (min-width: 1042px) {
+    display: none;
+    margin-bottom: 0;
+  }
+`
+
 export const ContainerModalBody = styled.div`
   display: flex;
   align-items: center;
@@ -101,49 +32,58 @@ export const ContainerModalBody = styled.div`
   margin-top: 2rem;
   width: 100%;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (min-width: 1024px) {
+    flex-direction: column-reverse;
     margin-top: 0;
   }
+`
 
- `;
-
-export const ImageContainer = styled.div`
-
-display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 2rem;
+export const ImageProject = styled.img`
+  border-radius: 4px;
+  max-height: 586px;
+  margin: 2rem 0 4rem;
   width: 100%;
 
-  @media only screen and (max-width: 600px) {
-    margin-top: 0;
+  @media only screen and (max-width: 460px) {
+    height: 258px;
+    margin: 0 0 0.5rem;
   }
-
-  img{
-    width: 100%;
-    height: 836px;
-
-    @media only screen and (max-width: 600px) {
-    height: 300px;
-  }
-
-  }
-`;
-
+`
 
 export const FooterModal = styled.footer`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-top: 1rem;
-  margin: 2rem;
   width: 100%;
 
-  p {
-    margin-top: 2rem;
-    font-size: ${(props) => props.theme.textSizes.body1};
-    font-size: ${(props) => props.theme.fontWeight.regular};
-
+  @media only screen and (max-width: 760px) {
+    margin-top: 1rem;
   }
-`;
+`
+
+export const DescriptionModal = styled.p`
+  font-size: ${({ theme }) => theme.textSizes.body1};
+  font-weight: ${({ theme }) => theme.fontWeight.regular};
+  font-style: normal;
+  letter-spacing: 0.5px;
+  margin-bottom: 2rem;
+  color: ${({ theme }) => theme.colors['$color-neutral-120']};
+`
+
+export const Span = styled.span`
+  font-size: ${({ theme }) => theme.textSizes.subtitle1};
+  font-weight: ${({ theme }) => theme.fontWeight.regular};
+  font-style: normal;
+  letter-spacing: 0.15px;
+  color: ${({ theme }) => theme.colors['$color-neutral-130']};
+`
+
+export const UrlProject = styled(Link)`
+  font-size: ${({ theme }) => theme.textSizes.body2};
+  font-weight: ${({ theme }) => theme.fontWeight.regular};
+  font-style: normal;
+  line-height: 14px;
+  letter-spacing: 0.25px;
+  color: ${({ theme }) => theme.colors['$color-info-80']};
+  cursor: pointer;
+`

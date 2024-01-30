@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import LoadingButton from '@mui/lab/LoadingButton'
 
 export const SignInContainer = styled.main`
   align-items: center;
@@ -56,15 +55,6 @@ export const SubTitle = styled.h5`
     font-size: ${({ theme }) => theme.textSizes.subtitle1};
     line-height: 16px;
     letter-spacing: 0.15px;
-  }
-`
-export const SubmitButton = styled(LoadingButton)`
-  && {
-    background-color: ${({ theme }) => theme.colors['$color-secondary-100']};
-
-    &:hover {
-      background-color: ${({ theme }) => theme.colors['$color-secondary-110']};
-    }
   }
 `
 

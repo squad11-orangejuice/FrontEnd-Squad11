@@ -1,117 +1,102 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from 'react'
-import {
-  CardProjectContainer,
-  SubtitleText,
-  TextContainer,
-  Titletext,
-  Footer,
-  Tag,
-} from './styles'
-import ImageUser from '@/assets/ImageUser.png'
+import { AreaCard, CardProjectContainer } from './styles'
+import UserImage from '@/assets/avatar1.svg'
 
-import CollectionsIcon from '@mui/icons-material/Collections'
-import EditProjectButton from '../EditProjectButton'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectData } from '@/context/ModalContext'
 import { ViewProjectModal } from '../ViewProjectModal'
+import { CardAddProject } from '../CardAddProject'
+import { useLocation } from 'react-router-dom'
+import { EditProjectButton } from '../EditProjectButton'
+import { ProjectDetails } from '../ProjectDetails'
 
 interface CardProjectProps {
-  projectData: ProjectData;
-  onClick: () => void
+  isCursorPointerActive?: boolean
+  projectData?: ProjectData | undefined
 }
 export function CardProject({
+  isCursorPointerActive = false,
   projectData,
-  onClick,
 }: CardProjectProps) {
-  const [userId, setUserId] = useState('1')
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const modalContext = useOpenCloseModal()
-  const { openEditModal, openDeleteModal } = modalContext
-  const { id, description, url, tags, title, linkProject, userName } = projectData
+
+  const {
+    openEditModal,
+    openAddProjectModal,
+    openDeleteModal,
+    openViewPostModal,
+    viewPostModalOpen,
+  } = modalContext
+
+  const location = useLocation()
+
+  const actualRoute = location.pathname
 
   function handleClickOpenEditModal() {
-    openEditModal({
-      id,
-      description,
-      url,
-      tags,
-      title,
-      linkProject,
-      userName,
-    })
+    if (projectData) {
+      openEditModal({
+        id: projectData.id,
+        description: projectData.description,
+        url: projectData.url,
+        tags: projectData.tags,
+        title: projectData.title,
+        linkProject: projectData.linkProject,
+        userName: projectData.userName,
+      })
+    }
   }
 
   function handleClickOpenDeleteModal() {
-    openDeleteModal({
-      id,
-      description,
-      url,
-      tags,
-      title,
-      linkProject,
-      userName,
-    })
-  }
-
-  function handleOnModalClose() {
-    setIsModalOpen(false);
-  }
-
-  function handleOnClick() {
-    setIsModalOpen(true);
-    onClick();
+    if (projectData) {
+      openDeleteModal({
+        id: projectData.id,
+        description: projectData.description,
+        url: projectData.url,
+        tags: projectData.tags,
+        title: projectData.title,
+        linkProject: projectData.linkProject,
+        userName: projectData.userName,
+      })
+    }
   }
 
   const shouldRenderEditButton =
-    userId === id ? (
+    projectData && actualRoute === '/projetos' ? (
       <EditProjectButton
         openModalEdit={handleClickOpenEditModal}
         openModalDelete={handleClickOpenDeleteModal}
       />
     ) : null
 
-
-  const tagContent = tags.map((item) => {
-    return <Tag key={item}>{item}</Tag>
-  })
-
-  const cardContent = url ? (
-    <>
-      <img src={url} alt="Imagem" />
-    </>
+  const cardContent = projectData?.url ? (
+    <img src={projectData?.url} alt="Imagem" />
   ) : (
-    <>
-      <CollectionsIcon sx={{ fontSize: 40 }} />
-      <TextContainer>
-        <Titletext> Adicione seu primeiro projeto </Titletext>
-        <SubtitleText>
-          {' '}
-          Compartilhe seu talento com milhares de pessoas{' '}
-        </SubtitleText>
-      </TextContainer>
-    </>
+    <AreaCard>
+      <CardAddProject
+        title="Adicione seu primeiro projeto"
+        handleDivClick={openAddProjectModal}
+      />
+    </AreaCard>
   )
 
   return (
-    <>
-      <div>
-        <CardProjectContainer onClick={handleOnClick}>
-          {shouldRenderEditButton}
-          {cardContent}
-          {url ? (
-            <Footer>
-              <div>
-                <img src={ImageUser} alt="Foto do usuário" />
-                <p>{userName}</p>
-                <p>12/23</p>
-              </div>
-              <div>{tagContent}</div>
-            </Footer>
-          ) : null}
-        </CardProjectContainer>
-      </div>
-      {isModalOpen && <ViewProjectModal modalData={projectData} isOpen={isModalOpen} onClose={handleOnModalClose} />}
-    </>
+    <CardProjectContainer
+      onClick={() =>
+        actualRoute === '/descobrir' ? openViewPostModal(projectData!) : null
+      }
+      style={{ cursor: isCursorPointerActive ? 'pointer' : 'default' }}
+    >
+      {shouldRenderEditButton}
+      {cardContent}
+      {projectData?.url ? (
+        <ProjectDetails
+          date="12/23"
+          tags={projectData.tags}
+          urlUserImage={UserImage}
+          userName={projectData.userName}
+        />
+      ) : null}
+      {viewPostModalOpen && <ViewProjectModal />}
+    </CardProjectContainer>
   )
 }

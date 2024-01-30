@@ -10,7 +10,7 @@ type Props = {
   openModalDelete: () => void
 }
 
-export default function BasicMenu({ openModalEdit, openModalDelete }: Props) {
+export function EditProjectButton({ openModalEdit, openModalDelete }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   const open = Boolean(anchorEl)

@@ -1,30 +1,24 @@
 import styled from 'styled-components'
 
 export const CardProjectContainer = styled.button`
-  position: relative;
-  display: flex;
-  width: calc(100% - 4rem);
-  height: 16.12rem;
-  border-radius: 4px;
-  margin: 2rem 2rem 2rem 2rem;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   background: ${(props) => props.theme.colors['$color-neutral-70']};
+  border-radius: 4px;
   border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 389px;
 
-  @media only screen and (min-width: 601px) {
-    width: 24.31rem;
+  @media screen and (max-width: 455px) {
+    width: 100%;
   }
 
   img {
-    width: calc(100%);
-    height: 14.03rem;
+    width: 100%;
+    height: 258px;
     border-radius: 4px;
-
-    @media only screen and (min-width: 601px) {
-      width: 24.31rem;
-    }
   }
 `
 
@@ -48,7 +42,7 @@ export const SubtitleText = styled.div`
 export const Footer = styled.div`
   display: flex;
   height: 2.09rem;
-  width: calc(100%);
+  width: 100%;
   padding: 0.3rem;
   background: ${(props) => props.theme.colors['$color-neutral-60']};
   justify-content: space-between;
@@ -84,4 +78,14 @@ export const Tag = styled.div`
 
 export const EditButton = styled.button`
   position: absolute;
+`
+
+export const AreaCard = styled.div`
+  height: 258px;
+  width: 389px;
+  border-radius: 4px;
+
+  @media only screen and (max-width: 437px) {
+    width: 312px;
+  }
 `
