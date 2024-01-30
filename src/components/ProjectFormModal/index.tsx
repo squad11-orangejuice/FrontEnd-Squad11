@@ -23,6 +23,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { tags } from '@/utils/tags'
 import FormHelperText from '@mui/material/FormHelperText'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
+import SucessModal from '../SucessModal'
 import { CardAddProject } from '../CardAddProject'
 import Typography from '@mui/material/Typography'
 
@@ -46,6 +47,7 @@ export function ProjectFormModal({ titleModal }: Props) {
   const [loading, setLoading] = useState(false)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [modalSucessOpenState, setModalSucessOpenState] = useState(false)
 
   const modalContext = useOpenCloseModal()
   const { closeEditModal, projectData, closeAddProjectModal } = modalContext
@@ -63,6 +65,13 @@ export function ProjectFormModal({ titleModal }: Props) {
     setLoading(true)
     console.log('Dados enviados:', data)
     setLoading(false)
+
+    //Texto do modal sucess muda dependendo da resposta do servidor.
+    setModalSucessOpenState(true)
+  }
+
+  const onModalClose = () => {
+    setModalSucessOpenState(false)
   }
 
   const handleDivClick = () => {
@@ -209,6 +218,9 @@ export function ProjectFormModal({ titleModal }: Props) {
           </AreaInput>
         </AreaForm>
       </AreaModal>
+
+
+      {<SucessModal modalText={'Edição concluída com sucesso!'} openState={modalSucessOpenState} onClickConfirm={onModalClose} />}
     </ProjectFormModalContainer>
   )
 }

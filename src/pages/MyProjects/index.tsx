@@ -108,5 +108,6 @@ export function MyProjects() {
         {deleteModalOpen && <DeleteProjectModal />}
       </ContainerMyProject>
     </MainContent>
+
   )
 }
