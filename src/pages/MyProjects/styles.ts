@@ -112,7 +112,3 @@ export const CardDisplay = styled.div`
     }
   }
 `
-export const DivSkeleton = styled.div`
-  width: 390px;
-  height: 258px;
-`
