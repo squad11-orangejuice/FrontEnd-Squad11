@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const MainContent = styled.main`
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 `
 
 export const ContainerMyProject = styled.div`
@@ -111,8 +112,4 @@ export const CardDisplay = styled.div`
       }
     }
   }
-`
-export const DivSkeleton = styled.div`
-  width: 390px;
-  height: 258px;
 `

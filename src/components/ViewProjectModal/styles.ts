@@ -79,11 +79,12 @@ export const Span = styled.span`
 `
 
 export const UrlProject = styled(Link)`
+  color: ${({ theme }) => theme.colors['$color-info-80']};
+  cursor: pointer;
   font-size: ${({ theme }) => theme.textSizes.body2};
   font-weight: ${({ theme }) => theme.fontWeight.regular};
   font-style: normal;
   line-height: 14px;
   letter-spacing: 0.25px;
-  color: ${({ theme }) => theme.colors['$color-info-80']};
-  cursor: pointer;
+  padding-bottom: 2px;
 `

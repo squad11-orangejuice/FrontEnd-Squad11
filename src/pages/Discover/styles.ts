@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const MainContent = styled.main`
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 `
 
 export const MyDiscoverContainer = styled.div`
@@ -46,7 +47,6 @@ export const TitleContainer = styled.div`
 
   height: 33%;
 
-
   h4 {
     color: ${(props) => props.theme.colors['$color-principal-90']};
     font-size: ${(props) => props.theme.textSizes.h4};
@@ -57,10 +57,11 @@ export const TitleContainer = styled.div`
       font-size: ${(props) => props.theme.textSizes.h5};
       letter-spacing: 0;
     }
+  }
   p {
     text-align: center;
     color: ${(props) => props.theme.colors['$color-neutral-130']};
     font-size: ${(props) => props.theme.textSizes.h4};
-    font-weight:  ${(props) => props.theme.fontWeight.regular};
+    font-weight: ${(props) => props.theme.fontWeight.regular};
   }
 `
