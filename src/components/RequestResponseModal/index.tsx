@@ -10,32 +10,24 @@ import {
 import { Button } from '../Button'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 
-export enum Status {
-  Success = 'success',
-  Error = 'error',
-}
-
-interface ModalSucessProps {
-  modalText: string
-  typeMessage: Status
-}
-
-export function RequestResponseModal({
-  modalText,
-  typeMessage,
-}: ModalSucessProps) {
-  const { closeAllModal, requestResponseModalOpen } = useOpenCloseModal()
+export function RequestResponseModal() {
+  const {
+    closeAllModal,
+    requestResponseModalOpen,
+    requestResponseMessage,
+    requestStatus,
+  } = useOpenCloseModal()
 
   return (
     <Dialog open={requestResponseModalOpen} onClose={closeAllModal}>
       <DialogContainer>
         <div>
           <StyledDialogTitle>
-            <p> {modalText} </p>
+            <p> {requestResponseMessage} </p>
           </StyledDialogTitle>
 
           <DialogContent>
-            {typeMessage === 'success' ? (
+            {requestStatus === 'success' ? (
               <CheckCircleIcon sx={{ fontSize: 40 }} color="success" />
             ) : (
               <ErrorIcon sx={{ fontSize: 40 }} color="error" />

@@ -25,6 +25,7 @@ import { Button } from '@/components/Button'
 import { SkeletonLoading } from '@/components/SkeletonLoading'
 import { getAllProjects } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
+import { RequestResponseModal } from '@/components/RequestResponseModal'
 
 export function MyProjects() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -106,6 +107,7 @@ export function MyProjects() {
         )}
         {editModalOpen && <ProjectFormModal titleModal="Editar projeto" />}
         {deleteModalOpen && <DeleteProjectModal />}
+        <RequestResponseModal />
       </ContainerMyProject>
     </MainContent>
   )
