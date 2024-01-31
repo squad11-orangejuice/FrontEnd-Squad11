@@ -27,6 +27,9 @@ import SucessModal from '../SucessModal'
 import { CardAddProject } from '../CardAddProject'
 import Typography from '@mui/material/Typography'
 import { ITag } from '@/utils/types'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { addProjects } from '@/services/api'
+import axios from 'axios'
 
 type Props = {
   titleModal: string
@@ -69,13 +72,40 @@ export function ProjectFormModal({ titleModal }: Props) {
     resolver: zodResolver(validationSchema),
   })
 
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setLoading(true)
-    console.log('Dados enviados:', data)
-    setLoading(false)
+  const queryClient = useQueryClient()
 
-    // Texto do modal sucess muda dependendo da resposta do servidor.
-    setModalSucessOpenState(true)
+  const { mutateAsync } = useMutation({
+    mutationFn: async (data: FormInputs) => {
+      if (!projectData) {
+        return await addProjects(data)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['project'] })
+      setLoading(false)
+      setModalSucessOpenState(true)
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          setLoading(false)
+        } else {
+          console.error(
+            'Ocorreu um erro durante a solicitação de login:',
+            error.message,
+          )
+          setLoading(false)
+        }
+      }
+      console.error('Erro desconhecido:', error)
+      setLoading(false)
+    },
+  })
+
+  const onSubmit: SubmitHandler<FormInputs> = async (data: FormInputs) => {
+    setLoading(true)
+    mutateAsync(data)
+    console.log('Dados enviados:', data)
   }
 
   const onModalClose = () => {
