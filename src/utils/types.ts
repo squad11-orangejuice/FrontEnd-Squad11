@@ -17,3 +17,11 @@ export interface IProject {
   user: IUser
   tags: ITag[]
 }
+
+export interface IRequestData {
+  title: string
+  tags: string[]
+  link: string
+  imagem: string
+  description: string
+}
