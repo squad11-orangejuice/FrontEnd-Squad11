@@ -15,9 +15,10 @@ interface ModalContextType {
   viewPostModalOpen: boolean
   openViewPostModal: (projectData: IProject) => void
   closeViewPostModal: () => void
-  requestSucessModalOpen: boolean
-  OpenRequestSucessModal: () => void
-  closeRequestSucessModal: () => void
+  requestResponseModalOpen: boolean
+  OpenRequestResponseModal: () => void
+  closeRequestResponseModal: () => void
+  closeAllModal: () => void
 }
 
 interface ModalContextProviderProps {
@@ -32,8 +33,17 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   const [viewPostModalOpen, setViewPostModalOpen] = useState(false)
-  const [requestSucessModalOpen, setRequestSucessModalOpen] = useState(false)
+  const [requestResponseModalOpen, setRequestResponseModalOpen] =
+    useState(false)
   const [projectData, setProjectData] = useState<IProject | null>(null)
+
+  const closeAllModal = () => {
+    setDeleteModalOpen(false)
+    setEditModalOpen(false)
+    setRequestResponseModalOpen(false)
+    setAddProjectModalOpen(false)
+    setViewPostModalOpen(false)
+  }
 
   const openDeleteModal = (projectData: IProject) => {
     setDeleteModalOpen(true)
@@ -62,8 +72,8 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
   }
   const closeViewPostModal = () => setViewPostModalOpen(false)
 
-  const OpenRequestSucessModal = () => setRequestSucessModalOpen(true)
-  const closeRequestSucessModal = () => setRequestSucessModalOpen(false)
+  const OpenRequestResponseModal = () => setRequestResponseModalOpen(true)
+  const closeRequestResponseModal = () => setRequestResponseModalOpen(false)
 
   return (
     <ModalContext.Provider
@@ -81,9 +91,10 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
         viewPostModalOpen,
         openViewPostModal,
         closeViewPostModal,
-        requestSucessModalOpen,
-        OpenRequestSucessModal,
-        closeRequestSucessModal,
+        requestResponseModalOpen,
+        OpenRequestResponseModal,
+        closeRequestResponseModal,
+        closeAllModal,
       }}
     >
       {children}
