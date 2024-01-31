@@ -6,7 +6,7 @@ export const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000',
 })
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA2NjU2NjcyfQ.7frmydswctjaKyYamt7iZiN9vK4u4q1KE9RhLk1tVhQ'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA2NzQwMzE5fQ.Nzvhup0LGhD_cVivrWkFNDfPmakwlcNflRlzHaLyHns'
 
 export async function getAllProjects() {
   return (
@@ -74,6 +74,16 @@ export async function updateProjects({
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+  ).data
+}
+
+export async function deleteProjects(id: string) {
+  return (
+    await axiosInstance.delete(`/projeto/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     })
   ).data
