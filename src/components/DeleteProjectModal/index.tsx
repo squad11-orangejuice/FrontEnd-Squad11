@@ -9,20 +9,60 @@ import {
   Title,
 } from './styles'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { deleteProjects } from '@/services/api'
+import axios from 'axios'
+import { Status } from '@/context/ModalContext'
 
 export function DeleteProjectModal() {
   const [loading, setLoading] = useState(false)
 
-  const modalContext = useOpenCloseModal()
-  const { closeDeleteModal, OpenRequestSucessModal } = modalContext
+  const queryClient = useQueryClient()
 
-  async function handleDeleteProject() {
-    setLoading(true)
-    setTimeout(() => {
+  const modalContext = useOpenCloseModal()
+  const { closeDeleteModal, projectData, OpenRequestResponseModal } =
+    modalContext
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async () => {
+      setLoading(true)
+
+      if (projectData && projectData.id) {
+        return await deleteProjects(projectData.id)
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['project'] })
       setLoading(false)
-      OpenRequestSucessModal()
-    }, 2000)
-  }
+      OpenRequestResponseModal({
+        statusRequest: Status.Success,
+        titleMensagem: 'Projeto deletado com sucesso!',
+      })
+    },
+    onError: (error) => {
+      setLoading(false)
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 401) {
+          OpenRequestResponseModal({
+            statusRequest: Status.Error,
+            titleMensagem: 'Usuário não autorizado',
+          })
+        } else {
+          console.log(error)
+          OpenRequestResponseModal({
+            statusRequest: Status.Error,
+            titleMensagem: 'Algo deu errado tente novamente!',
+          })
+        }
+      }
+      OpenRequestResponseModal({
+        statusRequest: Status.Error,
+        titleMensagem: 'Algo deu errado tente novamente!',
+      })
+
+      console.error('Erro desconhecido:', error)
+    },
+  })
 
   return (
     <ModalDeleteContainer>
@@ -37,7 +77,7 @@ export function DeleteProjectModal() {
             loading={loading}
             color="primary"
             size="large"
-            onClick={handleDeleteProject}
+            onClick={() => mutateAsync()}
           >
             EXCLUIR
           </ButtonDelete>
