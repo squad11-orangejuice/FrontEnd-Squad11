@@ -1,4 +1,4 @@
-import { IProject } from '@/utils/types'
+import { IProject, IRequestData } from '@/utils/types'
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
@@ -14,5 +14,31 @@ export async function getAllProjects() {
         Authorization: `Bearer ${token}`,
       },
     })
+  ).data
+}
+
+export async function addProjects({
+  imagem,
+  link,
+  tags,
+  title,
+  description,
+}: IRequestData) {
+  return (
+    await axiosInstance.post(
+      '/projeto/novo',
+      {
+        titulo: title,
+        link,
+        descricao: description,
+        imagem,
+        tags,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
   ).data
 }
