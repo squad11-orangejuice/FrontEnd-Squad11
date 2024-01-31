@@ -43,6 +43,7 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
     setRequestResponseModalOpen(false)
     setAddProjectModalOpen(false)
     setViewPostModalOpen(false)
+    setProjectData(null)
   }
 
   const openDeleteModal = (projectData: IProject) => {

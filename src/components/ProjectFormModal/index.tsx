@@ -28,8 +28,10 @@ import { CardAddProject } from '../CardAddProject'
 import Typography from '@mui/material/Typography'
 import { ITag } from '@/utils/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { addProjects } from '@/services/api'
+import { addProjects, updateProjects } from '@/services/api'
 import axios from 'axios'
+import { imageUrlToBase64 } from '@/functions/imageUrlToBase64'
+import { isBase64 } from '@/functions/isBAse64'
 
 type Props = {
   titleModal: string
@@ -86,6 +88,7 @@ export function ProjectFormModal({ titleModal }: Props) {
       if (!projectData) {
         return await addProjects(data)
       }
+      return await updateProjects({ id: projectData.id, ...data })
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['project'] })
@@ -99,24 +102,34 @@ export function ProjectFormModal({ titleModal }: Props) {
       OpenRequestResponseModal()
     },
     onError: (error) => {
+      setLoading(false)
       if (axios.isAxiosError(error)) {
-        setLoading(false)
+        if (error.response && error.response.status === 401) {
+          setRequestResponseMessage('Usuário não autorizado')
+          OpenRequestResponseModal()
+        }
         setRequestStatus(Status.Error)
         setRequestResponseMessage('Algo deu errado tente novamente')
         OpenRequestResponseModal()
       }
-      setLoading(false)
       setRequestStatus(Status.Error)
       setRequestResponseMessage('Algo deu errado tente novamente')
       OpenRequestResponseModal()
+
       console.error('Erro desconhecido:', error)
     },
   })
 
   const onSubmit: SubmitHandler<FormInputs> = async (data: FormInputs) => {
     setLoading(true)
-    mutateAsync(data)
-    console.log('Dados enviados:', data)
+
+    if (!isBase64(data.imagem)) {
+      const base64Image = await imageUrlToBase64(data.imagem)
+      data.imagem = base64Image
+      mutateAsync(data)
+    } else {
+      mutateAsync(data)
+    }
   }
 
   const handleDivClick = () => {

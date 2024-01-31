@@ -47,3 +47,34 @@ export async function addProjects({
     })
   ).data
 }
+
+export async function updateProjects({
+  imagem,
+  link,
+  tags,
+  title,
+  description,
+  id,
+}: IRequestData) {
+  const formData = new FormData()
+
+  const a = convertBase64ToBlob(imagem)
+  formData.append('titulo', title)
+  formData.append('link', link)
+  formData.append('descricao', description)
+
+  formData.append('imagem', a)
+
+  tags.forEach((tag, index) => {
+    formData.append(`tags[${index}]`, tag)
+  })
+
+  return (
+    await axiosInstance.put(`/projeto/${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+  ).data
+}
