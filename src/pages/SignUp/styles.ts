@@ -66,6 +66,9 @@ export const AreaForm = styled('form')`
   & > div:nth-child(n + 3) {
     grid-column: span 2;
   }
+  button {
+    grid-column: span 2;
+  }
 `
 
 export const LinkText = styled(Link)`
@@ -78,4 +81,5 @@ export const LinkText = styled(Link)`
   text-decoration: none;
   text-align: left;
   width: 100%;
+  grid-column: span 2;
 `
