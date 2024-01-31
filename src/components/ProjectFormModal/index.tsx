@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, MouseEvent } from 'react'
 import * as z from 'zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -26,6 +26,7 @@ import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import SucessModal from '../SucessModal'
 import { CardAddProject } from '../CardAddProject'
 import Typography from '@mui/material/Typography'
+import { ITag } from '@/utils/types'
 
 type Props = {
   titleModal: string
@@ -46,16 +47,23 @@ type FormInputs = z.infer<typeof validationSchema>
 export function ProjectFormModal({ titleModal }: Props) {
   const [loading, setLoading] = useState(false)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
+  const [isFormValid, setIsFormValid] = useState<boolean>(false)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [modalSucessOpenState, setModalSucessOpenState] = useState(false)
 
   const modalContext = useOpenCloseModal()
-  const { closeEditModal, projectData, closeAddProjectModal } = modalContext
+  const {
+    closeEditModal,
+    projectData,
+    closeAddProjectModal,
+    openViewPostModal,
+  } = modalContext
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<FormInputs>({
     resolver: zodResolver(validationSchema),
@@ -66,7 +74,7 @@ export function ProjectFormModal({ titleModal }: Props) {
     console.log('Dados enviados:', data)
     setLoading(false)
 
-    //Texto do modal sucess muda dependendo da resposta do servidor.
+    // Texto do modal sucess muda dependendo da resposta do servidor.
     setModalSucessOpenState(true)
   }
 
@@ -102,17 +110,42 @@ export function ProjectFormModal({ titleModal }: Props) {
     closeAddProjectModal()
   }
 
-  useEffect(() => {
-    if (projectData && projectData.url) {
-      console.log(projectData.url)
-      setValue('imagem', projectData.url)
-      setValue('title', projectData.title)
-      setValue('tags', projectData.tags)
-      setValue('description', projectData.description)
-      setValue('link', projectData.linkProject)
+  function extractNamesFromTags(tags: ITag[]) {
+    return tags.map((tag) => tag.nome)
+  }
 
-      setPreviewImage(projectData.url)
-      setSelectedTags(projectData.tags)
+  function handleClickPreviewPost() {
+    const { title, tags, link, description, imagem } = watch()
+
+    if (isFormValid) {
+      openViewPostModal({
+        data: '',
+        descricao: description,
+        imagem,
+        link,
+        tags: tags.map((tag) => {
+          return { nome: tag }
+        }),
+        titulo: title,
+        user: {
+          nome: 'douglas',
+          sobrenome: 'santos',
+        },
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (projectData && projectData.imagem) {
+      setValue('imagem', projectData.imagem)
+      setValue('title', projectData.titulo)
+      setValue('tags', extractNamesFromTags(projectData.tags))
+      setValue('description', projectData.descricao)
+      setValue('link', projectData.link)
+
+      setPreviewImage(projectData.imagem)
+      setSelectedTags(extractNamesFromTags(projectData.tags))
+      setIsFormValid(true)
     }
   }, [projectData])
 
@@ -143,7 +176,22 @@ export function ProjectFormModal({ titleModal }: Props) {
               </Typography>
             )}
 
-            <SubTitle>Visualizar publicação</SubTitle>
+            <SubTitle
+              style={{
+                display: 'inline-block',
+                width: 'fit-content',
+                cursor: isFormValid ? 'pointer' : 'not-allowed',
+              }}
+              onMouseEnter={(e: MouseEvent<HTMLDivElement>) =>
+                (e.currentTarget.style.opacity = isFormValid ? '0.5' : '1')
+              }
+              onMouseLeave={(e: MouseEvent<HTMLDivElement>) =>
+                (e.currentTarget.style.opacity = '1')
+              }
+              onClick={handleClickPreviewPost}
+            >
+              Visualizar publicação
+            </SubTitle>
             <AreaButton>
               <SubmitButton
                 type="submit"
@@ -173,7 +221,7 @@ export function ProjectFormModal({ titleModal }: Props) {
               {...register('title')}
               error={!!errors.title}
               helperText={errors.title?.message}
-              defaultValue={projectData?.title ?? ''}
+              defaultValue={projectData?.titulo ?? ''}
             />
             <div>
               <Autocomplete
@@ -201,7 +249,7 @@ export function ProjectFormModal({ titleModal }: Props) {
               {...register('link')}
               error={!!errors.link}
               helperText={errors.link?.message}
-              defaultValue={projectData?.linkProject ?? ''}
+              defaultValue={projectData?.link ?? ''}
             />
             <TextField
               sx={{ width: '100%', padding: 0 }}
@@ -213,14 +261,19 @@ export function ProjectFormModal({ titleModal }: Props) {
               rows={3.8}
               error={!!errors.description}
               helperText={errors.description?.message}
-              defaultValue={projectData?.description ?? ''}
+              defaultValue={projectData?.descricao ?? ''}
             />
           </AreaInput>
         </AreaForm>
       </AreaModal>
 
-
-      {<SucessModal modalText={'Edição concluída com sucesso!'} openState={modalSucessOpenState} onClickConfirm={onModalClose} />}
+      {
+        <SucessModal
+          modalText={'Edição concluída com sucesso!'}
+          openState={modalSucessOpenState}
+          onClickConfirm={onModalClose}
+        />
+      }
     </ProjectFormModalContainer>
   )
 }
