@@ -23,7 +23,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { tags } from '@/utils/tags'
 import FormHelperText from '@mui/material/FormHelperText'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
-import SucessModal from '../SucessModal'
+import { RequestResponseModal, Status } from '../RequestResponseModal'
 import { CardAddProject } from '../CardAddProject'
 import Typography from '@mui/material/Typography'
 import { ITag } from '@/utils/types'
@@ -37,7 +37,11 @@ type Props = {
 
 const validationSchema = z.object({
   title: z.string().min(4, 'O título deve ter pelo menos 4 caracteres'),
-  tags: z.array(z.string()),
+  tags: z
+    .array(z.string())
+    .refine((tags) => tags.length >= 1 && tags.length <= 3, {
+      message: 'Deve haver pelo menos 1 tag e no máximo 3 tags',
+    }),
   link: z.string().min(4, 'O link deve ter pelo menos 4 caracteres'),
   description: z
     .string()
@@ -52,7 +56,9 @@ export function ProjectFormModal({ titleModal }: Props) {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isFormValid, setIsFormValid] = useState<boolean>(false)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [modalSucessOpenState, setModalSucessOpenState] = useState(false)
+  const [requestStatus, setRequestStatus] = useState<Status>(Status.Error)
+  const [requestResponseMessage, setRequestResponseMessage] =
+    useState<string>('')
 
   const modalContext = useOpenCloseModal()
   const {
@@ -60,6 +66,7 @@ export function ProjectFormModal({ titleModal }: Props) {
     projectData,
     closeAddProjectModal,
     openViewPostModal,
+    OpenRequestResponseModal,
   } = modalContext
 
   const {
@@ -83,22 +90,26 @@ export function ProjectFormModal({ titleModal }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['project'] })
       setLoading(false)
-      setModalSucessOpenState(true)
+      setRequestStatus(Status.Success)
+      setRequestResponseMessage(
+        !projectData
+          ? 'Projeto adicionado com sucesso!'
+          : 'Edição concluída com sucesso!',
+      )
+      OpenRequestResponseModal()
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        if (error.response) {
-          setLoading(false)
-        } else {
-          console.error(
-            'Ocorreu um erro durante a solicitação de login:',
-            error.message,
-          )
-          setLoading(false)
-        }
+        setLoading(false)
+        setRequestStatus(Status.Error)
+        setRequestResponseMessage('Algo deu errado tente novamente')
+        OpenRequestResponseModal()
       }
-      console.error('Erro desconhecido:', error)
       setLoading(false)
+      setRequestStatus(Status.Error)
+      setRequestResponseMessage('Algo deu errado tente novamente')
+      OpenRequestResponseModal()
+      console.error('Erro desconhecido:', error)
     },
   })
 
@@ -106,10 +117,6 @@ export function ProjectFormModal({ titleModal }: Props) {
     setLoading(true)
     mutateAsync(data)
     console.log('Dados enviados:', data)
-  }
-
-  const onModalClose = () => {
-    setModalSucessOpenState(false)
   }
 
   const handleDivClick = () => {
@@ -165,6 +172,22 @@ export function ProjectFormModal({ titleModal }: Props) {
     }
   }
 
+  const updateFormValidity = () => {
+    const { title, tags, link, description, imagem } = watch()
+    const isFormFilled =
+      title.trim() !== '' &&
+      tags.length > 0 &&
+      link.trim() !== '' &&
+      description.trim() !== '' &&
+      imagem !== ''
+
+    setIsFormValid(isFormFilled)
+  }
+
+  useEffect(() => {
+    updateFormValidity()
+  }, [watch()])
+
   useEffect(() => {
     if (projectData && projectData.imagem) {
       setValue('imagem', projectData.imagem)
@@ -183,10 +206,7 @@ export function ProjectFormModal({ titleModal }: Props) {
     <ProjectFormModalContainer>
       <AreaModal>
         <Title>{titleModal}</Title>
-        <AreaForm
-          encType="multipart/form-data"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <AreaForm onSubmit={handleSubmit(onSubmit)}>
           <AreaImage>
             <SubTitle>
               Selecione o conteúdo que você deseja fazer upload
@@ -270,7 +290,7 @@ export function ProjectFormModal({ titleModal }: Props) {
               />
               {errors.tags && (
                 <FormHelperText sx={{ marginLeft: '0.8rem', color: '#d32f2f' }}>
-                  Deve selecionar pelo menos 1 tag
+                  Deve haver pelo menos 1 tag e no máximo 3 tags{' '}
                 </FormHelperText>
               )}
             </div>
@@ -300,13 +320,10 @@ export function ProjectFormModal({ titleModal }: Props) {
         </AreaForm>
       </AreaModal>
 
-      {
-        <SucessModal
-          modalText={'Edição concluída com sucesso!'}
-          openState={modalSucessOpenState}
-          onClickConfirm={onModalClose}
-        />
-      }
+      <RequestResponseModal
+        modalText={requestResponseMessage}
+        typeMessage={requestStatus}
+      />
     </ProjectFormModalContainer>
   )
 }
