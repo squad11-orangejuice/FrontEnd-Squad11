@@ -183,7 +183,10 @@ export function ProjectFormModal({ titleModal }: Props) {
     <ProjectFormModalContainer>
       <AreaModal>
         <Title>{titleModal}</Title>
-        <AreaForm onSubmit={handleSubmit(onSubmit)}>
+        <AreaForm
+          encType="multipart/form-data"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <AreaImage>
             <SubTitle>
               Selecione o conteúdo que você deseja fazer upload
