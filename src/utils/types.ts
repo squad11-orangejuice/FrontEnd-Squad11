@@ -19,6 +19,7 @@ export interface IProject {
 }
 
 export interface IRequestData {
+  id?: string
   title: string
   tags: string[]
   link: string
