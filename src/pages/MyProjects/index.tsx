@@ -21,14 +21,18 @@ import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectFormModal } from '@/components/ProjectFormModal'
 import { DeleteProjectModal } from '@/components/DeleteProjectModal'
-import { mockInfo } from '@/utils/constants'
 import { Button } from '@/components/Button'
 import { SkeletonLoading } from '@/components/SkeletonLoading'
+import { getAllProjects } from '@/services/api'
+import { useQuery } from '@tanstack/react-query'
 
 export function MyProjects() {
-  const [items, setItems] = useState(mockInfo)
-  const [userId, setUserId] = useState('1')
   const [searchTerm, setSearchTerm] = useState('')
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['project'],
+    queryFn: getAllProjects,
+  })
 
   const modalContext = useOpenCloseModal()
 
@@ -43,18 +47,18 @@ export function MyProjects() {
     setSearchTerm(event.target.value)
   }
 
-  const filteredItems = items.filter((item) =>
-    item.tags.some((tag) =>
-      tag.toLowerCase().includes(searchTerm.toLowerCase()),
-    ),
-  )
+  const filteredItems = data
+    ? data.filter((item) =>
+        item.tags.some((tag) =>
+          tag.nome.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
+      )
+    : []
 
   const cardContent =
-    filteredItems.length >= 1 ? (
-      filteredItems.map((item, index) => {
-        if (userId === item.id) {
-          return <CardProject key={index} projectData={item} />
-        }
+    data && !isLoading && data.length > 0 ? (
+      filteredItems.map((item) => {
+        return <CardProject key={item.id} projectData={item} />
       })
     ) : (
       <>
@@ -93,7 +97,9 @@ export function MyProjects() {
             onChange={handleSearchChange}
           />
         </MyProjectsContainer>
-        <CardDisplay>{cardContent}</CardDisplay>
+        <CardDisplay>
+          {isLoading ? <SkeletonLoading quantity={3} /> : cardContent}
+        </CardDisplay>
 
         {addProjectModalOpen && (
           <ProjectFormModal titleModal="Adicionar projeto" />
