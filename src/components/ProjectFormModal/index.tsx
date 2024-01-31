@@ -23,7 +23,6 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { tags } from '@/utils/tags'
 import FormHelperText from '@mui/material/FormHelperText'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
-import { RequestResponseModal, Status } from '../RequestResponseModal'
 import { CardAddProject } from '../CardAddProject'
 import Typography from '@mui/material/Typography'
 import { ITag } from '@/utils/types'
@@ -32,6 +31,7 @@ import { addProjects, updateProjects } from '@/services/api'
 import axios from 'axios'
 import { imageUrlToBase64 } from '@/functions/imageUrlToBase64'
 import { isBase64 } from '@/functions/isBAse64'
+import { Status } from '@/context/ModalContext'
 
 type Props = {
   titleModal: string
@@ -58,9 +58,6 @@ export function ProjectFormModal({ titleModal }: Props) {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isFormValid, setIsFormValid] = useState<boolean>(false)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [requestStatus, setRequestStatus] = useState<Status>(Status.Error)
-  const [requestResponseMessage, setRequestResponseMessage] =
-    useState<string>('')
 
   const modalContext = useOpenCloseModal()
   const {
@@ -93,28 +90,32 @@ export function ProjectFormModal({ titleModal }: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['project'] })
       setLoading(false)
-      setRequestStatus(Status.Success)
-      setRequestResponseMessage(
-        !projectData
+
+      OpenRequestResponseModal({
+        statusRequest: Status.Success,
+        titleMensagem: !projectData
           ? 'Projeto adicionado com sucesso!'
           : 'Edição concluída com sucesso!',
-      )
-      OpenRequestResponseModal()
+      })
     },
     onError: (error) => {
       setLoading(false)
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.status === 401) {
-          setRequestResponseMessage('Usuário não autorizado')
-          OpenRequestResponseModal()
+          OpenRequestResponseModal({
+            statusRequest: Status.Error,
+            titleMensagem: 'Usuário não autorizado',
+          })
         }
-        setRequestStatus(Status.Error)
-        setRequestResponseMessage('Algo deu errado tente novamente')
-        OpenRequestResponseModal()
+        OpenRequestResponseModal({
+          statusRequest: Status.Error,
+          titleMensagem: 'Algo deu errado tente novamente!',
+        })
       }
-      setRequestStatus(Status.Error)
-      setRequestResponseMessage('Algo deu errado tente novamente')
-      OpenRequestResponseModal()
+      OpenRequestResponseModal({
+        statusRequest: Status.Error,
+        titleMensagem: 'Algo deu errado tente novamente!',
+      })
 
       console.error('Erro desconhecido:', error)
     },
@@ -332,11 +333,6 @@ export function ProjectFormModal({ titleModal }: Props) {
           </AreaInput>
         </AreaForm>
       </AreaModal>
-
-      <RequestResponseModal
-        modalText={requestResponseMessage}
-        typeMessage={requestStatus}
-      />
     </ProjectFormModalContainer>
   )
 }
