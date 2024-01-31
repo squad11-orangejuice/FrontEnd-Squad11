@@ -3,16 +3,17 @@ import { AreaCard, CardProjectContainer } from './styles'
 import UserImage from '@/assets/avatar1.svg'
 
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
-import { ProjectData } from '@/context/ModalContext'
 import { ViewProjectModal } from '../ViewProjectModal'
 import { CardAddProject } from '../CardAddProject'
 import { useLocation } from 'react-router-dom'
 import { EditProjectButton } from '../EditProjectButton'
 import { ProjectDetails } from '../ProjectDetails'
+import { IProject } from '@/utils/types'
+import { formatarDate } from '@/functions/formatarDate'
 
 interface CardProjectProps {
   isCursorPointerActive?: boolean
-  projectData?: ProjectData | undefined
+  projectData?: IProject | undefined
 }
 export function CardProject({
   isCursorPointerActive = false,
@@ -22,8 +23,8 @@ export function CardProject({
 
   const {
     openEditModal,
-    openAddProjectModal,
     openDeleteModal,
+    openAddProjectModal,
     openViewPostModal,
     viewPostModalOpen,
   } = modalContext
@@ -34,29 +35,13 @@ export function CardProject({
 
   function handleClickOpenEditModal() {
     if (projectData) {
-      openEditModal({
-        id: projectData.id,
-        description: projectData.description,
-        url: projectData.url,
-        tags: projectData.tags,
-        title: projectData.title,
-        linkProject: projectData.linkProject,
-        userName: projectData.userName,
-      })
+      openEditModal(projectData)
     }
   }
 
   function handleClickOpenDeleteModal() {
     if (projectData) {
-      openDeleteModal({
-        id: projectData.id,
-        description: projectData.description,
-        url: projectData.url,
-        tags: projectData.tags,
-        title: projectData.title,
-        linkProject: projectData.linkProject,
-        userName: projectData.userName,
-      })
+      openDeleteModal(projectData)
     }
   }
 
@@ -68,8 +53,8 @@ export function CardProject({
       />
     ) : null
 
-  const cardContent = projectData?.url ? (
-    <img src={projectData?.url} alt="Imagem" />
+  const cardContent = projectData?.imagem ? (
+    <img src={projectData?.imagem} alt="Imagem" />
   ) : (
     <AreaCard>
       <CardAddProject
@@ -88,12 +73,12 @@ export function CardProject({
     >
       {shouldRenderEditButton}
       {cardContent}
-      {projectData?.url ? (
+      {projectData?.imagem ? (
         <ProjectDetails
-          date="12/23"
+          date={formatarDate(projectData.data!)}
           tags={projectData.tags}
           urlUserImage={UserImage}
-          userName={projectData.userName}
+          user={projectData.user}
         />
       ) : null}
       {viewPostModalOpen && <ViewProjectModal />}

@@ -16,6 +16,7 @@ import UserImage from '@/assets/avatar2.svg'
 import useIsMobile from '@/hooks/useIsMobile'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ProjectDetails } from '../ProjectDetails'
+import { formatarDate } from '@/functions/formatarDate'
 
 const style = {
   position: 'absolute',
@@ -37,7 +38,7 @@ export function ViewProjectModal() {
   const { projectData, closeViewPostModal, viewPostModalOpen } =
     useOpenCloseModal()
 
-  const { userName, url, description, linkProject, title, tags } = projectData!
+  const { descricao, imagem, link, tags, titulo, user, data } = projectData!
 
   const isMobile = useIsMobile()
 
@@ -69,21 +70,21 @@ export function ViewProjectModal() {
             />
           </button>
           <ContainerModalBody>
-            <TitleProject> {title} </TitleProject>
-            <ImageProject src={url} alt="image projeto" />
+            <TitleProject> {titulo} </TitleProject>
+            <ImageProject src={imagem} alt="image projeto" />
             <ProjectDetails
-              date="12/23"
+              date={formatarDate(data)}
               tags={tags}
               urlUserImage={UserImage}
-              userName={userName}
-              titleProject={title}
+              user={user}
+              titleProject={titulo}
             />
           </ContainerModalBody>
           <FooterModal>
-            <DescriptionModal> {description} </DescriptionModal>
+            <DescriptionModal> {descricao} </DescriptionModal>
             <Span>Download</Span>
-            <UrlProject to={linkProject} target="_blank">
-              {linkProject}
+            <UrlProject to={link} target="_blank">
+              {link}
             </UrlProject>
           </FooterModal>
         </MainContainer>

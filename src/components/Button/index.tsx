@@ -14,6 +14,7 @@ export function Button({ loading = false, title, ...rest }: IButton) {
       loading={loading}
       {...rest}
       sx={{
+        width: '100%',
         backgroundColor:
           title === 'CANCELAR'
             ? '#D3D3D3'

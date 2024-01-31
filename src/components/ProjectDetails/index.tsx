@@ -11,19 +11,20 @@ import {
   PublishDate,
   NameProject,
 } from './styled'
+import { ITag, IUser } from '@/utils/types'
 
 type Props = {
   titleProject?: string
   urlUserImage: string
-  userName: string
+  user: IUser
   date: string
-  tags: string[]
+  tags: ITag[]
 }
 
 export function ProjectDetails({
   date,
   urlUserImage,
-  userName,
+  user,
   tags,
   titleProject,
 }: Props) {
@@ -65,18 +66,19 @@ export function ProjectDetails({
         />
         {isMobile ? (
           <AreaDetails>
-            <UserName>{userName}</UserName>
+            <UserName>{`${user.nome} ${user.sobrenome}`}</UserName>
             <PublishDate>{date}</PublishDate>
           </AreaDetails>
         ) : (
-          <UserInfo>{`${userName} • ${date}`}</UserInfo>
+          <UserInfo>{`${user.nome} ${user.sobrenome} • ${date}`}</UserInfo>
         )}
       </UserInformationContainer>
       {titleProject && isMobile && <NameProject>{titleProject}</NameProject>}
       <TagContainer>
-        {tags.map((tag, index) => {
-          return <Tag key={index}>{tag}</Tag>
-        })}
+        {tags &&
+          tags.map((tag, index) => {
+            return <Tag key={index}>{tag.nome}</Tag>
+          })}
       </TagContainer>
     </Container>
   )
