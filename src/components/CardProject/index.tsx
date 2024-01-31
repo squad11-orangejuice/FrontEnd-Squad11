@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom'
 import { EditProjectButton } from '../EditProjectButton'
 import { ProjectDetails } from '../ProjectDetails'
 import { IProject } from '@/utils/types'
+import { formatarDate } from '@/functions/formatarDate'
 
 interface CardProjectProps {
   isCursorPointerActive?: boolean
@@ -74,7 +75,7 @@ export function CardProject({
       {cardContent}
       {projectData?.imagem ? (
         <ProjectDetails
-          date={projectData.data!}
+          date={formatarDate(projectData.data!)}
           tags={projectData.tags}
           urlUserImage={UserImage}
           user={projectData.user}
