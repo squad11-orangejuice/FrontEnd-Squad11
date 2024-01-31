@@ -53,7 +53,6 @@ export const UserInfo = styled.p`
   font-size: ${({ theme }) => theme.textSizes.subtitle1};
   letter-spacing: 0.15px;
   text-align: left;
-  width: 100%;
 `
 
 export const NameProject = styled.h5`
@@ -68,7 +67,7 @@ export const NameProject = styled.h5`
 
 export const Tag = styled.span`
   border-radius: 50%;
-  padding: 5px;
+  padding: 0.438rem 0.625rem;
   margin-left: 5px;
   background: ${(props) => props.theme.colors['$color-neutral-70']};
   font-size: 12px;
