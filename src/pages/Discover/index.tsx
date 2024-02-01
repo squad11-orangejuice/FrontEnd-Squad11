@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Header } from '@/components/Header'
 import TextField from '@mui/material/TextField'
 import {
@@ -11,32 +11,38 @@ import {
 import { CardProject } from '@/components/CardProject'
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ViewProjectModal } from '@/components/ViewProjectModal'
-import { mockInfo } from '@/utils/constants'
+import { useQuery } from '@tanstack/react-query'
+import { getAllDiscover } from '@/services/api'
+import { SkeletonLoading } from '@/components/SkeletonLoading'
 
 export function Discover() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [items, setItems] = useState(mockInfo)
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['discover'],
+    queryFn: getAllDiscover,
+  })
 
   const modalContext = useOpenCloseModal()
 
   const { viewPostModalOpen } = modalContext
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
 
-  const filteredItems = items.filter((item) =>
-    item.tags.some((tag) =>
-      tag.toLowerCase().includes(searchTerm.toLowerCase()),
-    ),
-  )
+  const filteredItems = data
+    ? data.filter((item) =>
+        item.tags.some((tag) =>
+          tag.nome.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
+      )
+    : []
 
   const cardContent =
-    filteredItems.length >= 1
-      ? filteredItems.map((item, index) => {
-          return (
-            <CardProject key={index} projectData={item} isCursorPointerActive />
-          )
+    data && filteredItems.length >= 1
+      ? filteredItems.map((item) => {
+          return <CardProject key={item.id} projectData={item} />
         })
       : null
 
@@ -60,7 +66,9 @@ export function Discover() {
           />
         </ProjectsContainer>
 
-        <CardDisplay>{cardContent}</CardDisplay>
+        <CardDisplay>
+          {isLoading ? <SkeletonLoading quantity={3} /> : cardContent}
+        </CardDisplay>
       </MyDiscoverContainer>
       {viewPostModalOpen && <ViewProjectModal />}
     </MainContent>
