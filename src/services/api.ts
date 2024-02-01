@@ -1,9 +1,9 @@
 import { convertBase64ToBlob } from '@/functions/covertStringInBlob'
-import { IProject, IRequestData } from '@/utils/types'
+import { IProject, IRegister, IRequestData } from '@/utils/types'
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://hackathon-orange-juice.onrender.com',
 })
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA2NzQwMzE5fQ.Nzvhup0LGhD_cVivrWkFNDfPmakwlcNflRlzHaLyHns'
@@ -84,6 +84,31 @@ export async function deleteProjects(id: string) {
     await axiosInstance.delete(`/projeto/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
+      },
+    })
+  ).data
+}
+
+export async function registerUser({
+  name,
+  surname,
+  email,
+  password,
+}: IRegister) {
+
+  const data = {
+    nome: name,
+    sobrenome: surname,
+    email: email,
+    password: password
+  };
+
+  const json = JSON.stringify(data);
+
+  return (
+    await axiosInstance.post('/usuario/cadastrar', json, {
+      headers: {
+        'Content-Type': 'application/json',
       },
     })
   ).data
