@@ -12,6 +12,8 @@ import {
   NameProject,
 } from './styled'
 import { ITag, IUser } from '@/utils/types'
+import Avatar from '@mui/material/Avatar'
+import { stringAvatar } from '@/functions/stringAvatar'
 
 type Props = {
   titleProject?: string
@@ -21,13 +23,7 @@ type Props = {
   tags: ITag[]
 }
 
-export function ProjectDetails({
-  date,
-  urlUserImage,
-  user,
-  tags,
-  titleProject,
-}: Props) {
+export function ProjectDetails({ date, user, tags, titleProject }: Props) {
   const divRef = useRef<HTMLDivElement>(null)
   const [divWidth, setDivWidth] = useState<number>(0)
 
@@ -56,14 +52,23 @@ export function ProjectDetails({
           gap: isMobile ? '0.75rem' : '0.5rem',
         }}
       >
-        <UserAvatar
-          style={{
-            maxHeight: isMobile ? '2.5rem' : '1.5rem',
-            maxWidth: isMobile ? '2.5rem' : '1.5rem',
-          }}
-          src={urlUserImage}
-          alt="Foto do usuário"
-        />
+        {!user.avatar ? (
+          <Avatar
+            {...stringAvatar(`${user?.nome} ${user?.sobrenome}`)}
+            sizes="40"
+          />
+        ) : (
+          <UserAvatar
+            style={{
+              maxHeight: isMobile ? '2.5rem' : '1.5rem',
+              maxWidth: isMobile ? '2.5rem' : '1.5rem',
+              borderRadius: '100%',
+            }}
+            src={user.avatar}
+            alt="Foto do usuário"
+          />
+        )}
+
         {isMobile ? (
           <AreaDetails>
             <UserName>{`${user.nome} ${user.sobrenome}`}</UserName>
