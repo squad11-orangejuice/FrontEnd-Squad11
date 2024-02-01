@@ -92,6 +92,9 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
     statusRequest,
     titleMensagem,
   }: IRequestResponseModal) => {
+    setDeleteModalOpen(false)
+    setAddProjectModalOpen(false)
+    setEditModalOpen(false)
     setRequestStatus(statusRequest)
     setRequestResponseMessage(titleMensagem)
     setRequestResponseModalOpen(true)
