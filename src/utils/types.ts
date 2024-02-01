@@ -1,6 +1,7 @@
 export interface IUser {
   nome: string
   sobrenome: string
+  avatar: string
 }
 
 export interface ITag {
@@ -34,8 +35,30 @@ export interface IRegister {
   password: string
 }
 
-
 export interface ILogin {
   email: string
   password: string
+}
+
+export interface IResponseGoogle {
+  sub: string
+  email: string
+  family_name: string
+  given_name: string
+  picture: string
+}
+
+export interface IRequestLoginSocial {
+  sub: string
+  email: string
+  family_name: string
+  given_name: string
+  avatar: string
+}
+
+export interface IResponseLogin {
+  given_name: string
+  family_name: string
+  avatar: string
+  token: string
 }
