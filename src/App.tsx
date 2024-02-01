@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { ModalContextProvider } from './context/ModalContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthProvider } from './context/AuthContext'
 
 export function App() {
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
@@ -17,9 +18,11 @@ export function App() {
         <ThemeProvider theme={defaultTheme}>
           <GlobalStyle />
           <BrowserRouter>
-            <ModalContextProvider>
-              <Router />
-            </ModalContextProvider>
+            <AuthProvider>
+              <ModalContextProvider>
+                <Router />
+              </ModalContextProvider>
+            </AuthProvider>
           </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
