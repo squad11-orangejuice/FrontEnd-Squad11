@@ -1,4 +1,6 @@
+import Cookies from 'js-cookie'
+
 export function getBearerToken() {
-  const token = localStorage.getItem('bearerToken');
-  return token ? `Bearer ${token}` : null;
+  const token = Cookies.get('session')
+  return token ? `Bearer ${token}` : null
 }
