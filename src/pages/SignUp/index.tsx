@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -9,9 +8,7 @@ import { Button } from '@/components/Button'
 import { useTheme } from 'styled-components'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-
 import { registerUser } from '@/services/api'
-
 
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 
@@ -51,7 +48,6 @@ export function SignUp() {
   const theme = useTheme()
   const queryClient = useQueryClient()
 
-
   const { mutateAsync } = useMutation({
     mutationFn: async (data: FormInputs) => {
       return registerUser(data)
@@ -62,11 +58,11 @@ export function SignUp() {
       setSucessRegister(true)
     },
     onError: (error) => {
+      console.log(error)
       setLoading(false)
       setMessageError('Error Message')
     },
   })
-
 
   const {
     handleSubmit,
