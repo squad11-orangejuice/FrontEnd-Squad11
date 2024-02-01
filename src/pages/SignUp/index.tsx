@@ -6,6 +6,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/Button'
 
 import { useTheme } from 'styled-components'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import axios from 'axios'
+
+
+import { registerUser } from '@/services/api'
+
 
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 
@@ -43,6 +49,24 @@ export function SignUp() {
   const [messageError, setMessageError] = useState<string>('')
 
   const theme = useTheme()
+  const queryClient = useQueryClient()
+
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (data: FormInputs) => {
+      return registerUser(data)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['project'] })
+      setLoading(false)
+      setSucessRegister(true)
+    },
+    onError: (error) => {
+      setLoading(false)
+      setMessageError('Error Message')
+    },
+  })
+
 
   const {
     handleSubmit,
@@ -55,11 +79,7 @@ export function SignUp() {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data)
     setLoading(true)
-    setTimeout(() => {
-      setSucessRegister(true)
-      setMessageError('')
-      setLoading(false)
-    }, 2000)
+    mutateAsync(data)
   }
 
   const handleError: SubmitErrorHandler<FormInputs> = (errors) => {

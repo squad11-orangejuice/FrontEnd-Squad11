@@ -26,3 +26,10 @@ export interface IRequestData {
   imagem: string
   description: string
 }
+
+export interface IRegister {
+  name: string
+  surname: string
+  email: string
+  password: string
+}
