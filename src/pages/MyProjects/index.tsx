@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Header } from '@/components/Header'
 import UserImage from '@/assets/ImageUser.png'
 import {
@@ -44,7 +44,7 @@ export function MyProjects() {
     openAddProjectModal,
   } = modalContext
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
 
