@@ -18,6 +18,16 @@ export async function getAllProjects() {
   ).data
 }
 
+export async function getAllDiscover() {
+  return (
+    await axiosInstance.get<IProject[]>('/descobrir', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  ).data
+}
+
 export async function addProjects({
   imagem,
   link,
