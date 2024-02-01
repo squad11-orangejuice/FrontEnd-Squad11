@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -7,7 +8,6 @@ import { Button } from '@/components/Button'
 
 import { useTheme } from 'styled-components'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios'
 
 
 import { registerUser } from '@/services/api'

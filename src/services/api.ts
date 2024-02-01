@@ -1,18 +1,23 @@
 import { convertBase64ToBlob } from '@/functions/covertStringInBlob'
-import { IProject, IRegister, IRequestData } from '@/utils/types'
+import { getBearerToken } from '@/functions/getBearerToken'
+import { ILogin, IProject, IRegister, IRequestData } from '@/utils/types'
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
   baseURL: 'https://hackathon-orange-juice.onrender.com',
 })
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA2NzQwMzE5fQ.Nzvhup0LGhD_cVivrWkFNDfPmakwlcNflRlzHaLyHns'
 
 export async function getAllProjects() {
+
+  const token = getBearerToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
   return (
     await axiosInstance.get<IProject[]>('/portfolio', {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     })
   ).data
@@ -25,6 +30,13 @@ export async function addProjects({
   title,
   description,
 }: IRequestData) {
+
+
+  const token = getBearerToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
   const formData = new FormData()
 
   const a = convertBase64ToBlob(imagem)
@@ -41,7 +53,7 @@ export async function addProjects({
   return (
     await axiosInstance.post('/projeto/novo', formData, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
@@ -56,6 +68,12 @@ export async function updateProjects({
   description,
   id,
 }: IRequestData) {
+
+  const token = getBearerToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
   const formData = new FormData()
 
   const a = convertBase64ToBlob(imagem)
@@ -72,7 +90,7 @@ export async function updateProjects({
   return (
     await axiosInstance.put(`/projeto/${id}`, formData, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
@@ -80,10 +98,17 @@ export async function updateProjects({
 }
 
 export async function deleteProjects(id: string) {
+
+
+  const token = getBearerToken();
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
   return (
     await axiosInstance.delete(`/projeto/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     })
   ).data
@@ -107,6 +132,28 @@ export async function registerUser({
 
   return (
     await axiosInstance.post('/usuario/cadastrar', json, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  ).data
+}
+
+export async function loginUser({
+
+  email,
+  password,
+}: ILogin) {
+
+  const data = {
+    email: email,
+    password: password
+  };
+
+  const json = JSON.stringify(data);
+
+  return (
+    await axiosInstance.post('/usuario/login', json, {
       headers: {
         'Content-Type': 'application/json',
       },
