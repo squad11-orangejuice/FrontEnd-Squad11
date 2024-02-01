@@ -86,12 +86,17 @@ export function ModalContextProvider({ children }: ModalContextProviderProps) {
     setViewPostModalOpen(true)
     setProjectData(projectData)
   }
-  const closeViewPostModal = () => setViewPostModalOpen(false)
-
+  const closeViewPostModal = () => {
+    setViewPostModalOpen(false)
+    setProjectData(null)
+  }
   const OpenRequestResponseModal = ({
     statusRequest,
     titleMensagem,
   }: IRequestResponseModal) => {
+    setEditModalOpen(false)
+    setAddProjectModalOpen(false)
+    setDeleteModalOpen(false)
     setRequestStatus(statusRequest)
     setRequestResponseMessage(titleMensagem)
     setRequestResponseModalOpen(true)
