@@ -1,8 +1,6 @@
-/* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '@/components/Header'
-import UserImage from '@/assets/ImageUser.png'
 import {
   ContainerMyProject,
   CardDisplay,
@@ -26,23 +24,27 @@ import { SkeletonLoading } from '@/components/SkeletonLoading'
 import { getAllProjects } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { RequestResponseModal } from '@/components/RequestResponseModal'
+import { useAuth } from '@/hooks/useAuth'
+import { stringAvatar } from '@/functions/stringAvatar'
+import Avatar from '@mui/material/Avatar'
 
 export function MyProjects() {
   const [searchTerm, setSearchTerm] = useState('')
+  const [urlImage, setUrlImage] = useState<string>('')
 
   const { data, isLoading } = useQuery({
     queryKey: ['project'],
     queryFn: getAllProjects,
   })
 
-  const modalContext = useOpenCloseModal()
-
   const {
     editModalOpen,
     deleteModalOpen,
     addProjectModalOpen,
     openAddProjectModal,
-  } = modalContext
+  } = useOpenCloseModal()
+
+  const { user } = useAuth()
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value)
@@ -68,14 +70,32 @@ export function MyProjects() {
       </>
     )
 
+  useEffect(() => {
+    if (user?.avatar) {
+      setUrlImage(user.avatar)
+    }
+  }, [user])
+
   return (
     <MainContent>
       <Header />
       <ContainerMyProject>
         <ContainerUser>
-          <UserPerfil src={UserImage} alt="Foto-perfil-usuário" />
+          {urlImage ? (
+            <UserPerfil src={user?.avatar} alt="Foto-perfil-usuário" />
+          ) : (
+            <Avatar
+              {...stringAvatar(`${user?.given_name} ${user?.family_name}`)}
+              sx={{
+                width: '7.625rem',
+                height: '7.625rem',
+                fontSize: '4rem',
+              }}
+            />
+          )}
+
           <UserInfo>
-            <UserName> Camila Soares</UserName>
+            <UserName>{`${user?.given_name} ${user?.family_name}`}</UserName>
             <UserLocal> Brasil </UserLocal>
             <Button
               title="ADICIONAR PROJETO"

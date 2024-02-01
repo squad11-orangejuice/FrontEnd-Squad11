@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { AreaCard, CardProjectContainer } from './styles'
-import UserImage from '@/assets/avatar1.svg'
 
 import { useOpenCloseModal } from '@/hooks/useOpenCloseModal'
 import { ViewProjectModal } from '../ViewProjectModal'
@@ -77,7 +75,7 @@ export function CardProject({
         <ProjectDetails
           date={formatarDate(projectData.data!)}
           tags={projectData.tags}
-          urlUserImage={UserImage}
+          urlUserImage={projectData.user.avatar}
           user={projectData.user}
         />
       ) : null}

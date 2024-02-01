@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import Alert from '@mui/material/Alert'
 
 export const SignInContainer = styled.main`
   align-items: center;
@@ -44,6 +45,25 @@ export const AreaForm = styled('form')`
   gap: 1rem;
   width: 100%;
 `
+export const AlertModal = styled(Alert)`
+  position: fixed;
+  top: 77px;
+  font-weight: ${({ theme }) => theme.textSizes.subtitle1};
+  height: 52px;
+  width: 320px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  &.visible {
+    opacity: 1;
+  }
+
+  @media (max-width: 360px) {
+    width: calc(100% - 2rem);
+    left: 1rem;
+    right: 1rem;
+  }
+`
+
 export const SubTitle = styled.h5`
   color: ${({ theme }) => theme.colors['$color-neutral-110']};
   font-weight: ${(props) => props.theme.fontWeight.regular};

@@ -6,9 +6,14 @@ import LogoGoogleDisable from '@/assets/logo googleg_disable.svg'
 import LoadingImg from '@/assets/loading.svg'
 
 import { Loading, Logo, StyledButton, Title } from './styles'
+import axios from 'axios'
+import { IResponseGoogle } from '@/utils/types'
+import { useAuth } from '@/hooks/useAuth'
 
 export function GoogleButton() {
   const [loading, setLoading] = useState(false)
+
+  const { loginSocialAPI } = useAuth()
 
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -20,7 +25,19 @@ export function GoogleButton() {
   }
   const loginSocial = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log(tokenResponse)
+      const userInfo: IResponseGoogle = await axios
+        .get(import.meta.env.VITE_URL_GOOGLE_AUTH, {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((res) => res.data)
+
+      loginSocialAPI({
+        avatar: userInfo.picture,
+        email: userInfo.email,
+        family_name: userInfo.family_name,
+        given_name: userInfo.given_name,
+        sub: userInfo.sub,
+      })
       setLoading(false)
     },
   })
