@@ -1,6 +1,12 @@
 import { convertBase64ToBlob } from '@/functions/covertStringInBlob'
 import { getBearerToken } from '@/functions/getBearerToken'
-import { ILogin, IProject, IRegister, IRequestData } from '@/utils/types'
+import {
+  ILogin,
+  IProject,
+  IRegister,
+  IRequestData,
+  IRequestLoginSocial,
+} from '@/utils/types'
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
@@ -8,14 +14,27 @@ export const axiosInstance = axios.create({
 })
 
 export async function getAllProjects() {
-
-  const token = getBearerToken();
+  const token = getBearerToken()
   if (!token) {
-    throw new Error("No authentication token found");
+    throw new Error('No authentication token found')
   }
 
   return (
     await axiosInstance.get<IProject[]>('/portfolio', {
+      headers: {
+        Authorization: token,
+      },
+    })
+  ).data
+}
+
+export async function getAllDiscover() {
+  const token = getBearerToken()
+  if (!token) {
+    throw new Error('No authentication token found')
+  }
+  return (
+    await axiosInstance.get<IProject[]>('/descobrir', {
       headers: {
         Authorization: token,
       },
@@ -30,11 +49,9 @@ export async function addProjects({
   title,
   description,
 }: IRequestData) {
-
-
-  const token = getBearerToken();
+  const token = getBearerToken()
   if (!token) {
-    throw new Error("No authentication token found");
+    throw new Error('No authentication token found')
   }
 
   const formData = new FormData()
@@ -68,10 +85,9 @@ export async function updateProjects({
   description,
   id,
 }: IRequestData) {
-
-  const token = getBearerToken();
+  const token = getBearerToken()
   if (!token) {
-    throw new Error("No authentication token found");
+    throw new Error('No authentication token found')
   }
 
   const formData = new FormData()
@@ -98,11 +114,9 @@ export async function updateProjects({
 }
 
 export async function deleteProjects(id: string) {
-
-
-  const token = getBearerToken();
+  const token = getBearerToken()
   if (!token) {
-    throw new Error("No authentication token found");
+    throw new Error('No authentication token found')
   }
 
   return (
@@ -120,15 +134,14 @@ export async function registerUser({
   email,
   password,
 }: IRegister) {
-
   const data = {
     nome: name,
     sobrenome: surname,
-    email: email,
-    password: password
-  };
+    email,
+    password,
+  }
 
-  const json = JSON.stringify(data);
+  const json = JSON.stringify(data)
 
   return (
     await axiosInstance.post('/usuario/cadastrar', json, {
@@ -139,24 +152,21 @@ export async function registerUser({
   ).data
 }
 
-export async function loginUser({
-
-  email,
-  password,
-}: ILogin) {
-
+export async function loginUser({ email, password }: ILogin) {
   const data = {
-    email: email,
-    password: password
-  };
+    email,
+    password,
+  }
 
-  const json = JSON.stringify(data);
+  const json = JSON.stringify(data)
 
-  return (
-    await axiosInstance.post('/usuario/login', json, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  ).data
+  return await axiosInstance.post('/usuario/login', json, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+}
+
+export async function socialLoginAPI(data: IRequestLoginSocial) {
+  return await axiosInstance.post('/usuario/login/google', data)
 }
