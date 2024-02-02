@@ -1,5 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { axiosInstance, loginUser, socialLoginAPI } from '@/services/api'
+import {
+  axiosInstance,
+  loginUser,
+  logoutUse,
+  socialLoginAPI,
+} from '@/services/api'
 import { createContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +20,7 @@ type AuthContextType = {
   isAuthenticated: boolean
   signIn: (data: SignInData) => Promise<void>
   loginSocialAPI: (data: IRequestLoginSocial) => void
+  logout: () => void
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -69,6 +75,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  async function logout() {
+    await logoutUse()
+    Cookies.remove('session')
+    Cookies.remove('user')
+    setUser(null)
+    setIsAuthenticated(false)
+
+    delete axiosInstance.defaults.headers.common.Authorization
+    navigate('/')
+  }
+
   useEffect(() => {
     const userSession = Cookies.get('session')
     const user = Cookies.get('user')
@@ -94,6 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signIn,
         user,
         loginSocialAPI,
+        logout,
       }}
     >
       {children}
