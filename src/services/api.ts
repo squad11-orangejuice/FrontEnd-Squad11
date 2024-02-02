@@ -10,8 +10,7 @@ import {
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
-  // baseURL: 'https://hackathon-orange-juice.onrender.com',
-  baseURL: 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_URL_BACKEND_ORANGE,
 })
 
 export async function getAllProjects() {
