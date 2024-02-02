@@ -40,10 +40,8 @@ export const ContainerModalBody = styled.div`
 
 export const ImageProject = styled.img`
   border-radius: 4px;
-  max-height: 586px;
   margin: 2rem 0 4rem;
   width: 100%;
-
   @media only screen and (max-width: 460px) {
     height: 258px;
     margin: 0 0 0.5rem;

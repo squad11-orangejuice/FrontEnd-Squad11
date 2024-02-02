@@ -1,10 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  axiosInstance,
-  loginUser,
-  logoutUse,
-  socialLoginAPI,
-} from '@/services/api'
+import { axiosInstance, loginUser, socialLoginAPI } from '@/services/api'
 import { createContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
@@ -76,7 +71,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function logout() {
-    await logoutUse()
     Cookies.remove('session')
     Cookies.remove('user')
     setUser(null)
