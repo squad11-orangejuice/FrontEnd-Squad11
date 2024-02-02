@@ -27,6 +27,7 @@ const MenuButton = () => {
     <>
       <Button
         id="basic-button"
+        className="menu-hamburgue"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
@@ -49,13 +50,35 @@ const MenuButton = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => handleClickRedirectToNextPage('projetos')}>
+        <MenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={() => handleClickRedirectToNextPage('projetos')}
+        >
           Meus Projetos
         </MenuItem>
-        <MenuItem onClick={() => handleClickRedirectToNextPage('descobrir')}>
+        <MenuItem
+          sx={{
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={() => handleClickRedirectToNextPage('descobrir')}
+        >
           Descobrir
         </MenuItem>
-        <MenuItem sx={{ borderTop: '1px solid #E0E0E0' }} onClick={handleClose}>
+        <MenuItem
+          sx={{
+            borderTop: '1px solid #E0E0E0',
+            '&:hover': {
+              background: '#FFEECC',
+            },
+          }}
+          onClick={handleClose}
+        >
           Configurações
         </MenuItem>
       </Menu>
