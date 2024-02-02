@@ -15,7 +15,7 @@ export const HeaderContainer = styled.header`
     padding: 1rem 2rem;
     border-radius: 0;
 
-    button {
+    .menu-hamburgue {
       display: none;
     }
   }
@@ -69,10 +69,4 @@ export const RightContainer = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 1rem;
-`
-
-export const UserImgContainer = styled.img`
-  border-radius: 300px;
-  width: 2.5rem;
-  height: 2.5rem;
 `

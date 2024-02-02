@@ -181,6 +181,7 @@ export function ProjectFormModal({ titleModal }: Props) {
         user: {
           nome: 'douglas',
           sobrenome: 'santos',
+          avatar: '',
         },
       })
     }

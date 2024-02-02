@@ -10,7 +10,7 @@ import {
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://hackathon-orange-juice.onrender.com',
+  baseURL: import.meta.env.VITE_URL_BACKEND_ORANGE,
 })
 
 export async function getAllProjects() {
@@ -169,4 +169,21 @@ export async function loginUser({ email, password }: ILogin) {
 
 export async function socialLoginAPI(data: IRequestLoginSocial) {
   return await axiosInstance.post('/usuario/login/google', data)
+}
+
+export async function logoutUse() {
+  const token = getBearerToken()
+  if (!token) {
+    throw new Error('No authentication token found')
+  }
+
+  return await axiosInstance.post(
+    '/usuario/logout',
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
+  )
 }

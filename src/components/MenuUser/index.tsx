@@ -1,33 +1,41 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
-import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import MenuIcon from '@mui/icons-material/Menu'
+import Avatar from '@mui/material/Avatar'
+import { useAuth } from '@/hooks/useAuth'
+import { Button } from '@mui/material'
+import { UserImgContainer } from './styles'
+import { stringAvatar } from '@/functions/stringAvatar'
 
-const MenuButton = () => {
+const MenuUser = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
+  const [urlImage, setUrlImage] = useState<string>('')
+  const { user, logout } = useAuth()
 
-  const navigate = useNavigate()
+  const open = Boolean(anchorEl)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
-  const handleClickRedirectToNextPage = (page: string) => {
+  const handleClickLogout = () => {
+    logout()
     setAnchorEl(null)
-    navigate(`/${page}`)
   }
   const handleClose = () => {
     setAnchorEl(null)
   }
 
+  useEffect(() => {
+    if (user?.avatar) {
+      setUrlImage(user?.avatar)
+    }
+  }, [user?.avatar])
+
   return (
     <>
       <Button
         id="basic-button"
-        className="menu-hamburgue"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
@@ -39,7 +47,18 @@ const MenuButton = () => {
           padding: 0,
         }}
       >
-        <MenuIcon sx={{ fontSize: '24px', color: '#ffffff' }} />
+        {urlImage ? (
+          <UserImgContainer src={urlImage} alt="Foto do usuário" />
+        ) : (
+          <Avatar
+            {...stringAvatar(`${user?.given_name} ${user?.family_name}`)}
+            sx={{
+              maxHeight: '2.5rem',
+              maxWidth: '2.5rem',
+              textTransform: 'lowercase',
+            }}
+          />
+        )}
       </Button>
       <Menu
         id="basic-menu"
@@ -56,34 +75,13 @@ const MenuButton = () => {
               background: '#FFEECC',
             },
           }}
-          onClick={() => handleClickRedirectToNextPage('projetos')}
+          onClick={handleClickLogout}
         >
-          Meus Projetos
-        </MenuItem>
-        <MenuItem
-          sx={{
-            '&:hover': {
-              background: '#FFEECC',
-            },
-          }}
-          onClick={() => handleClickRedirectToNextPage('descobrir')}
-        >
-          Descobrir
-        </MenuItem>
-        <MenuItem
-          sx={{
-            borderTop: '1px solid #E0E0E0',
-            '&:hover': {
-              background: '#FFEECC',
-            },
-          }}
-          onClick={handleClose}
-        >
-          Configurações
+          LOGOUT
         </MenuItem>
       </Menu>
     </>
   )
 }
 
-export default MenuButton
+export default MenuUser
