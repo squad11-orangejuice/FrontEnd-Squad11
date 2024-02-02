@@ -55,7 +55,11 @@ export function ProjectDetails({ date, user, tags, titleProject }: Props) {
         {!user.avatar ? (
           <Avatar
             {...stringAvatar(`${user?.nome} ${user?.sobrenome}`)}
-            sizes="40"
+            sx={{
+              maxHeight: isMobile ? '2.5rem' : '1.5rem',
+              maxWidth: isMobile ? '2.5rem' : '1.5rem',
+              textTransform: 'lowercase',
+            }}
           />
         ) : (
           <UserAvatar
