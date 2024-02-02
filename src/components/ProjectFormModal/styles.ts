@@ -22,25 +22,26 @@ export const ProjectFormModalContainer = styled.div`
   left: 0;
   top: 0;
   padding: 0 1.5rem;
-  padding-top: 11.125rem;
   position: fixed;
   width: 100vw;
 
   z-index: 999;
   @media (max-width: 768px) {
+    padding: 9.25rem 1.5rem 3.188rem;
     overflow-y: auto;
   }
 `
 
 export const AreaModal = styled.div`
   background-color: #fefefe;
-  min-height: 522px;
-  padding: 1.5rem 2rem;
-  width: 890px;
+  width: 100%;
+  padding: 1.5rem;
   animation: ${fadeIn} 0.3s ease;
-  @media (max-width: 890px) {
+  @media (min-width: 890px) {
+    width: 890px;
     height: auto;
-    padding: 1.5rem;
+    min-height: 522px;
+    padding: 1.5rem 2rem;
   }
 `
 export const Title = styled.h5`
