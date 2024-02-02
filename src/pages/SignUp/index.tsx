@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/Button'
 
 import { useTheme } from 'styled-components'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import { registerUser } from '@/services/api'
 
@@ -29,6 +29,7 @@ import {
   AreaRegister,
   AlertModal,
 } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const validationSchema = z.object({
   name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
@@ -46,17 +47,21 @@ export function SignUp() {
   const [messageError, setMessageError] = useState<string>('')
 
   const theme = useTheme()
-  const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const { mutateAsync } = useMutation({
     mutationFn: async (data: FormInputs) => {
       return registerUser(data)
     },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['project'] })
       setLoading(false)
       setSucessRegister(true)
+      setTimeout(() => {
+        navigate('/')
+      }, 3000)
     },
+
     onError: (error) => {
       console.log(error)
       setLoading(false)
@@ -73,7 +78,6 @@ export function SignUp() {
   })
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    console.log(data)
     setLoading(true)
     mutateAsync(data)
   }
