@@ -83,7 +83,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       delete axiosInstance.defaults.headers.common.Authorization
       setUser(null)
-      navigate('/')
     }
   }, [])
 
