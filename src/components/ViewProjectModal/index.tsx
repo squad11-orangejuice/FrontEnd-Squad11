@@ -20,6 +20,8 @@ import { formatarDate } from '@/functions/formatarDate'
 
 const style = {
   position: 'absolute',
+  maxWidth: '100vw',
+  maxHeight: '100vh',
   overflow: 'auto',
   top: '50%',
   left: '50%',
