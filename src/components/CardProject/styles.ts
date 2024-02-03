@@ -7,7 +7,7 @@ export const CardProjectContainer = styled.button`
   border: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   width: 389px;
 
