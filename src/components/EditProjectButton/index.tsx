@@ -42,6 +42,7 @@ export function EditProjectButton({ openModalEdit, openModalDelete }: Props) {
             fontSize: 28,
             padding: '2px',
             position: 'relative',
+            zIndex: '10',
           }}
         />
       </ButtonIconEdit>

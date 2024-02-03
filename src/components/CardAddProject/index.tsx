@@ -9,6 +9,7 @@ import {
   TextImageInput,
   TitleImageInput,
 } from './styles'
+import { useTheme } from 'styled-components'
 
 interface CardAddProjectProps {
   register?: UseFormRegister<any>
@@ -25,10 +26,16 @@ export function CardAddProject({
   previewImage,
   title,
 }: CardAddProjectProps) {
+  const theme = useTheme()
   return (
     <InputImage
       onClick={handleDivClick}
-      style={{ padding: previewImage ? '0' : '0 8px' }}
+      style={{
+        padding: previewImage ? '0' : '0 8px',
+        backgroundColor: previewImage
+          ? theme.colors['$color-neutral-60']
+          : theme.colors['$color-neutral-70'],
+      }}
     >
       {register && (
         <>
