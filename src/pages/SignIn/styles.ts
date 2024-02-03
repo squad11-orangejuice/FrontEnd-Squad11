@@ -12,7 +12,7 @@ export const SignInContainer = styled.main`
 export const Image = styled.img`
   height: 100vh;
   max-width: 32.813rem;
-  @media (max-width: 970px) {
+  @media (max-width: 1140px) {
     display: none;
   }
 `
@@ -43,7 +43,10 @@ export const AreaForm = styled('form')`
   flex: 1;
   flex-direction: column;
   gap: 1rem;
+  width: 32.313rem;
+  @media (max-width: 600px) {
   width: 100%;
+  }
 `
 export const AlertModal = styled(Alert)`
   position: fixed;

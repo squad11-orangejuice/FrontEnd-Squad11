@@ -12,7 +12,7 @@ export const SignUpContainer = styled.main`
 export const Image = styled.img`
   height: 100vh;
   max-width: 32.813rem;
-  @media (max-width: 970px) {
+  @media (max-width: 1140px) {
     display: none;
   }
 `
@@ -62,12 +62,18 @@ export const AreaForm = styled('form')`
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
-  width: 100%;
+  width: 32.313rem;
+
   & > div:nth-child(n + 3) {
     grid-column: span 2;
   }
   button {
     grid-column: span 2;
+  }
+
+   @media (max-width: 600px) {
+  width: 100%;
+
   }
 `
 
