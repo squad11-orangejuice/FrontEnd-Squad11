@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const InputImage = styled.div`
   align-items: center;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.colors['$color-neutral-70']};
+  /* background-color: ${({ theme }) => theme.colors['$color-neutral-70']}; */
   display: flex;
   flex-direction: column;
   height: 100%;
