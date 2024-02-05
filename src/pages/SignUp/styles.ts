@@ -71,9 +71,8 @@ export const AreaForm = styled('form')`
     grid-column: span 2;
   }
 
-   @media (max-width: 600px) {
-  width: 100%;
-
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `
 

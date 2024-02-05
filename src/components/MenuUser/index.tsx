@@ -77,7 +77,7 @@ const MenuUser = () => {
           }}
           onClick={handleClickLogout}
         >
-          LOGOUT
+          Logout
         </MenuItem>
       </Menu>
     </>
