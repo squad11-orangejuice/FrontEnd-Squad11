@@ -45,7 +45,7 @@ export const AreaForm = styled('form')`
   gap: 1rem;
   width: 32.313rem;
   @media (max-width: 600px) {
-  width: 100%;
+    width: 100%;
   }
 `
 export const AlertModal = styled(Alert)`
