@@ -10,7 +10,7 @@ export const DialogContainer = styled.div`
   padding: 2rem 3rem;
 
   @media only screen and (max-width: 600px) {
-    width: 70vh;
+    width: 100%;
   }
 
   div {

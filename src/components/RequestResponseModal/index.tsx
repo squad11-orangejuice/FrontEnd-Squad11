@@ -19,7 +19,11 @@ export function RequestResponseModal() {
   } = useOpenCloseModal()
 
   return (
-    <Dialog open={requestResponseModalOpen} onClose={closeAllModal}>
+    <Dialog
+      open={requestResponseModalOpen}
+      onClose={closeAllModal}
+      sx={{ width: '100vw', height: '100vh' }}
+    >
       <DialogContainer>
         <div>
           <StyledDialogTitle>
